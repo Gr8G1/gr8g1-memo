@@ -83,6 +83,15 @@ bootJar {
   - html 변환될 resource 생성 및 adoc 작성
     - Syntax reference: [https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference](https://ant.apache.org/manual/dirtasks.html#patterns)
 
+### *.adoc 스니핏 파일 추출 명령어
+```bash
+# .bashrc | .zshrc 
+snippet-files() {
+    echo -n "[snippets='"
+    ls "$1"/*.adoc | sed 's|.*/||;s/\.adoc$//' | sort -df | xargs | sed 's/ /,/g;s/$/'\'']/'
+}
+```
+
 #### 작성 예시 (Markdown과 유사)
 ```asciidoc
 = REST Docs

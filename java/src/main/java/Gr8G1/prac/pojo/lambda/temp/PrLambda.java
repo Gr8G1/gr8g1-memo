@@ -1,4 +1,4 @@
-package Gr8G1.prac.pojo.lambda;
+package Gr8G1.prac.pojo.lambda.temp;
 
 import Gr8G1.prac.pojo.lambda.temp.MyFunc;
 

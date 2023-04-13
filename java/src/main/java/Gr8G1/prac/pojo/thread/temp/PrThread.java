@@ -1,4 +1,4 @@
-package Gr8G1.prac.pojo.thread;
+package Gr8G1.prac.pojo.thread.temp;
 
 import java.util.*;
 import java.util.function.IntUnaryOperator;
