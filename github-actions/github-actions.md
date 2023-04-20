@@ -12,7 +12,6 @@ Gitgub 에서 공식적으로 제공하는 빌드, 테스트 및 배포 파이�
 ### GitHub status
 - github api 상태: [https://www.githubstatus.com/](https://www.githubstatus.com/)
 
-
 #### front/back 동일 저장소 사용시 pull-request-target & labels 워크플로우 구성
 ```yaml
 on:

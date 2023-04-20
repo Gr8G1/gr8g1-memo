@@ -24,6 +24,8 @@
 
 ## Gitgub Actions
 - [Gitgub Actions - Gitgub Actions란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
+- [Gitgub Actions - Frontend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
+- [Gitgub Actions - Backend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
 
 ## Java
 - [Java - Java란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/java.md)
