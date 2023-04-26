@@ -3,7 +3,6 @@
 ### 개발 환경별 Profiles 설정
 
 #### 폴더 및 application.yml 추가 및 변경
-
 - src/main/resources
   - application.yml -> application-common.yml
 

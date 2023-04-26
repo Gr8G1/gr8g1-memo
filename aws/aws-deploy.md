@@ -42,7 +42,7 @@ $ sudo ./aws/install
 
 #### Code Deploy Agent 설치
 ```
-$ sudo apt install ruby-full                                       // [Y / n] = Y
+$ sudo apt install ruby-full
 $ sudo apt install wget
 
 $ cd /home/ubuntu
@@ -55,11 +55,9 @@ $ sudo service codedeploy-agent status                             // * active �
 ```
 
 ### EC2 Timezone 변경
-
 - EC2 OS 환경별 설정: [configure-amazon-time-service-amazon-linux](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/set-time.html#configure-amazon-time-service-amazon-linux)
 
 ### EC2 run.sh
-
 개발 임시 배포 테스트 script/run.sh 사용시
 
 **SERVICE_NAME 등록 후 사용**
@@ -71,7 +69,6 @@ $ sudo service codedeploy-agent status                             // * active �
   ```
 
 ### RDS - MySql
-
 - DB 생성 후 로컬 테스트
 ```bash
 $ mysql -u [계정 ID] --host [엔드 포인트 주소] -P [포트 번호] -p
@@ -86,7 +83,6 @@ $ mysql -u [계정 ID] --host [엔드 포인트 주소] -P [포트 번호] -p
 - 
 
 ### AWS - CodeDeploy (Github Actions 사용시)
-
 #### 환경변수 등록
 ```bash
 $ sudo vi /etc/environment

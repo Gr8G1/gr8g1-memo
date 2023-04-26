@@ -1,6 +1,6 @@
 ## GitHub Actions
 
-Gitgub 에서 공식적으로 제공하는 빌드, 테스트 및 배포 파이프라인을 자동화할 수 있는 CI/CD 플랫폼
+Github 에서 공식적으로 제공하는 빌드, 테스트 및 배포 파이프라인을 자동화할 수 있는 CI/CD 플랫폼
 - document: [actions](https://docs.github.com/ko/actions)
 
 ### 표현식
@@ -17,9 +17,9 @@ Gitgub 에서 공식적으로 제공하는 빌드, 테스트 및 배포 파이�
 on:
   pull_request_target:
       types: [closed, labeled]
-      branches: [ "dev" ]
+      branches: ["브랜치명"]
 
-...
+  ...
 
 jobs:
   if_merged:
