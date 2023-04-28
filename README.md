@@ -23,10 +23,10 @@
 - [Docker - Docker란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker.md)
 - [Docker - Docker - EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker-ec2-ubuntu.md)
 
-## Gitgub Actions
-- [Gitgub Actions - Gitgub Actions란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
-- [Gitgub Actions - Frontend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/frontend-cicd.md)
-- [Gitgub Actions - Backend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/backend-cicd.md)
+## GitHub Actions
+- [GitHub Actions - GitHub Actions란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
+- [GitHub Actions - Frontend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/frontend-cicd.md)
+- [GitHub Actions - Backend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/backend-cicd.md)
 
 ## Java
 - [Java - Java란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/java.md)
