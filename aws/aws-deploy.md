@@ -18,12 +18,12 @@
 
 ### EC2
 #### JAVA 설치
-  ```
-  $ bash
-  $ cd ~
-  $ sudo apt update
-  $ sudo apt install openjdk-11-jre-headless
-  ```
+```bash
+$ bash
+$ cd ~
+$ sudo apt update
+$ sudo apt install openjdk-11-jre-headless
+```
 
 #### Github Project SSH 연결 설정
 ```bash
@@ -33,7 +33,7 @@ $ cat .ssh/id_rsa.pub             # git -> settings -> SSH and GPG keys -> SSH k
 - **ssh-key issue**: [2023-03-23-we-updated-our-rsa-ssh-host-key](https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/)
 
 #### AWS CLI 설치
-```
+```bash
 $ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 $ sudo apt install unzip
 $ unzip awscliv2.zip
@@ -41,7 +41,7 @@ $ sudo ./aws/install
 ```
 
 #### Code Deploy Agent 설치
-```
+```bash
 $ sudo apt install ruby-full
 $ sudo apt install wget
 
@@ -191,7 +191,6 @@ $ free -h
 ``` 
 
 ### EC2 Security-group 설정 : 80 -> 8080 포트 포워딩
-
 ```bash
 // # 포트 할당
 $ sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080

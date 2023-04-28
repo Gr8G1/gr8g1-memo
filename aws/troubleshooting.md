@@ -46,7 +46,7 @@
 
 #### 해결
 - 최종 등록된 포트목록
-  - 80: draining
+  - 80: draining                      # nginx 연동시 포트 활성화
   - 443: draining
   - 8080: healthy
 

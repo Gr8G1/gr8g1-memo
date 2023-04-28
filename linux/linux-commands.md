@@ -1,6 +1,7 @@
-## Linux Commands
+## Linux
 
-### chmod \[Option] \[Mode] \[File]
+### 명령어
+#### chmod [option] [mode] [file]
 
 | Owner | Group | Other |
 |---|---|---|
@@ -35,8 +36,7 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
     0~7     : 8진수(octet) 형식 모드 설정 값.
 ```
 
-
-### kill \[Option] \[PID]
+#### kill \[Option] \[PID]
 ```
   # 설명
   프로세스를 지정하고 신호(Signal)를 보내서 제어하는 명령어
@@ -58,7 +58,7 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
   20	SIGTSTP	TSTP	터미널에서 중지되어 있는 신호(Signal)
 ```
 
-### ps \[Option]
+#### ps [option]
 ```
   # 설명
   현재 실행중인 (사용자) 프로세스 출력
@@ -72,7 +72,7 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
     -h (hierarchy)	: 부모와 자식 프로세스의 관계를 들여쓰기를 통해 시각화하여 출력
 ```
 
-### grep \[Option] \[Regexp] \[File]
+#### grep [option] [regexp] [file]
 ```
   # 설명
   파일에서 특정 패턴을 찾아서 그 라인(행)을 출력한다.
@@ -104,7 +104,7 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
   그외... 
 ```
 
-### nohup \[Process_NAME] &
+#### nohup [process_name] &
 ```
   # 설명
   쉘스크립트파일 (*.sh)을 데몬 형태로 실행시키는 프로그램
@@ -119,7 +119,7 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
   nohup [Process_NAME]  1> /dev/null 2 >&1 & : 1> /dev/null = 표준 출력을 사용하지 않겠다는 의미이고, 2>&1 은 표준 에러를 표준 출력과 같게 만드는 명령
 ```
 
-### tail \[options]\[filename]
+#### tail [option] [filename]
 ```
   # 설명
   해당하는 파일의 마지막 부분을 읽어 내용을 확인할 수 있는 명령어
@@ -135,10 +135,41 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
   tail -f filename.txt
 ```
 
-### Memory
+#### ln [option] [origin-file] [link-file]
 ```
   # 설명
-  메모리 정보 / 메모리 사용량과 여유량 그리고 캐싱으로 사용되는 메모리가 얼마나 있는지 파악 할 수 있는 명력어
+  symbolic link를 생성하는 명령어
+  
+  # 옵션
+  -s: symbolic link를 생성
+  -f: 대상 파일이 이미 존재하면 덮어쓰기
+  -i: 대상 파일이 이미 존재하면 덮어쓸지 여부 선택
+  -v: symbolic link를 생성할 때마다 생성된 파일 이름을 출력
+  
+  # 사용법
+  ln -s /home/user1/file1 /home/user2/file2
+```
+
+#### truncate [option] [size] [file]
+```
+  # 설명
+  파일의 크기를 변경하는 명령어
+  > 일반적으로 파일의 크기를 줄이는데 사용 만약 파일의 크기를 0으로 줄이면, 파일의 내용이 모두 삭제된다.
+  
+  # 옵션
+  -s, --size: 파일의 크기를 설정
+  -c, --no-create: 파일이 존재하지 않으면 파일을 생성하지않는다
+  -o, --io-blocks: 파일 크기를 I/O 블록 크기 단위로 지정
+  -r, --reference: 지정한 파일의 크기와 동일하게 파일 크기를 조절
+
+  # 사용법
+  truncate -s 0 /example/log/error.log
+```
+
+#### Memory
+```
+  # 설명
+  메모리 정보 / 메모리 사용량과 여유량 그리고 캐싱으로 사용되는 메모리가 얼마나 있는지 파악 할 수 있는 명령어
   
   # 명령어
   total		: 설치된 총 메모리 크기 / 설정된 스왑 총 크기
@@ -163,20 +194,19 @@ r-x  : 마지막 3개 문자 = 전체 사용자의 사용 권한
 
   # 사용법
   free -h : 
-  
 ```
 
-### Changing
+#### Changing
 ```
-& (Ampersand)		: This command sends a process/script/command to the background. 
-&& (Logical AND)	: The command following this operator will only execute if the command preceding this operator has been successfully executed. 
-; (Semi-colon)		: The command following this operator will execute even if the command preceding this operator is not successfully executed.
-|| ( Logical OR)	: The command succeeding this operator is only executed if the command preceding it has failed.
-| (Pipe)		: The output of the first command acts as input to the second command.
-! (NOT)			: Negates an expression within a command. It is much like an “except” statement.
->,>>, < (Redirection)	: Redirects the output of a command or a group of commands to a file or stream.
-&&-|| (AND-OR)		: It is a combination of AND OR operator and is similar to the if-else statement.
-\ (Concatenation)	: Used to concatenate large commands over several lines in the shell.
-() (Precedence)		: Allows command to execute in precedence order.
-{} (Combination)	: The execution of the command succeeding this operator depends on the execution of the first command.
+& (Ampersand)		: 이 명령은 프로세스/스크립트/명령어를 백그라운드로 보낸다.
+&& (Logical AND)	: 이 연산자 다음에 오는 명령은, 이 연산자 앞의 명령이 성공적으로 실행되었을 경우에만 실행된다.
+|| ( Logical OR)	: 이 연산자 앞의 명령이 실패한 경우에만, 이 연산자 뒤의 명령이 실행된다.
+| (Pipe)		: 이 명령은 첫 번째 명령의 출력을 두 번째 명령의 입력으로 사용한다.
+! (NOT)			: 명령 안의 표현식 부정
+; (Semi-colon)		: 이 연산자 앞의 명령이 성공적으로 실행되지 않았더라도, 이 연산자 뒤의 명령은 실행된다.
+>, >>, < (Redirection)	:  명령 또는 명령 그룹의 출력을 파일이나 스트림으로 리디렉션한다.
+&&-|| (AND-OR)		: 이 연산자는 AND OR 연산자의 조합으로, if-else 문과 비슷하다.
+\ (Concatenation)	: 쉘에서 여러 줄에 걸쳐 큰 명령을 연결하는 데 사용된다.
+() (Precedence)		: 명령을 우선 순위 순서대로 실행할 수 있게 한다.
+{} (Combination)	: 이 연산자 다음에 오는 명령은, 첫 번째 명령의 실행 결과에 따라 실행된다.
 ```

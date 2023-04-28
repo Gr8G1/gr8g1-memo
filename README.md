@@ -21,6 +21,7 @@
 
 ## Docker
 - [Docker - Docker란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker.md)
+- [Docker - Docker - EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker-ec2-ubuntu.md)
 
 ## Gitgub Actions
 - [Gitgub Actions - Gitgub Actions란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
@@ -40,11 +41,15 @@
 - [Java - 쓰레드](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/thread/thread.md)
 - [Java - 파일 I/O](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/fileIO/fileIO.md)
 
+## Linux
+- [Linux - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/linux/linux-commands.md)
+
 ## MapStruct
 - [MapStruct - MapStruct란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/mapstruct/mapstruct.md)
 
 ## Nginx
 - [Nginx - Nginx란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/nginx/nginx.md)
+- [Nginx - Nginx - EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/nginx/nginx-ec2-ubuntu.md)
 
 ## QueryDsl
 - [QueryDsl - QueryDsl란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/querydsl/querydsl.md)
@@ -77,3 +82,6 @@
 - [Spring - Security - FilterChain](https://github.com/Gr8G1/gr8g1-memo/blob/main/spring/security/filter-chain.md)
 - [Spring - TDD](https://github.com/Gr8G1/gr8g1-memo/blob/main/spring/test/tdd.md)
 - [Spring - Docs](https://github.com/Gr8G1/gr8g1-memo/blob/main/spring/test/docs.md)
+
+## Vim
+- [Vim - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/vim/vim-commands.md)
