@@ -126,6 +126,20 @@ $ sudo vi /etc/environment
   }
   ```
 
+### **EC2 - ELB - Docker(Nginx + spring) 접근 순서**
+1. 클라이언트는 ELB(DNS)로 접근한다.
+2. ELB는 연결된 인스턴스(AWS EC2 인스턴스) 중 하나를 선택하여 연결한다.
+3. 선택된 인스턴스 내부에서 Docker 컨테이너를 찾아 연결한다.
+4. Docker 컨테이너 내부의 Nginx 서버는 예:) 80번 포트를 통해 클라이언트 요청을 수신한다.
+5. Nginx 서버는 리버스 프록시 설정을 통해 예:) 8080 포트에 바인딩된 스프링 애플리케이션 서버로 요청을 전달한다.
+6. 스프링 애플리케이션 서버는 해당 요청을 처리하고 결과를 Nginx 서버에 반환한다.
+7. Nginx 서버는 반환된 결과를 ELB에게 전달합니다.
+8. ELB는 반환된 결과를 클라이언트에게 전달합니다.
+
+> 도커 컨테이너는 각각 독립된 환경에서 실행되는 가상 환경일 뿐, 외부로 나가는 데이터의 흐름을 제어하는 역할을 하지 않는다.
+> 따라서 도커 컨테이너 내부에서 발생하는 데이터 흐름은 호스트와 마찬가지로 인터넷을 통해 외부로 나간다.
+> document: [https://docs.docker.com/config/containers/container-networking/](https://docs.docker.com/config/containers/container-networking/)
+
 ### AWS - ParameterStore(**Region 주의**)
 
 #### 생성 규칙

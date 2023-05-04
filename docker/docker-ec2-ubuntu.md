@@ -25,7 +25,7 @@ $ docker -v
 # Docker 활성화 & 실행
 $ sudo systemctl enable docker
 $ sudo service docker start
-$ service docker status 
+$ sudo service docker status 
 ```
 
 ### Docker-compose 설치

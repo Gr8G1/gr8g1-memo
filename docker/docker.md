@@ -10,6 +10,27 @@
 - 컨테이너는 컨테이너 안의 다양한 프로그램, 실행환경을 컨테이너로 추상화하고 동일한 인터페이스를 제공하여
   프로그램의 배포 및 관리를 단순하게 해준다.
 
+#### 컨테이너의 생명주기
+1. 생성(Create)
+   - 도커 이미지를 기반으로 컨테이너를 생성하는 명령어: **docker create <이미지 이름>**
+2. 준비(Pending)
+   - 컨테이너 실행 전 준비 단계를 거치는 명령어는 따로 존재하지 않는다.
+3. 실행(Running)
+   - 컨테이너를 실행하는 명령어: **docker start <컨테이너 이름 또는 ID>**
+   - 실행 중인 컨테이너의 상태를 확인하는 명령어: **docker ps**
+4. 일시 중지(Paused)
+   - 실행 중인 컨테이너를 일시 중지하는 명령어: **docker pause <컨테이너 이름 또는 ID>**
+   - 일시 중지된 컨테이너를 다시 실행하는 명령어: **docker unpause <컨테이너 이름 또는 ID>**
+5. 중지(Stopped)
+   - 실행 중인 컨테이너를 중지하는 명령어: **docker stop <컨테이너 이름 또는 ID>**
+     -  stop 명령어는 컨테이너에 SIGTERM 신호를 보내서 그 컨테이너를 graceful하게 종료시키려고 시도
+   - 실행 중인 컨테이너를 강제종료하는 명령어: **docker kill <컨테이너 이름 또는 ID>**
+     - kill 명령어는 바로 SIGKILL 신호를 보내 컨테이너를 강제로 종료
+   - 중지된 컨테이너를 다시 시작하는 명령어: **docker start <컨테이너 이름 또는 ID>**
+6. 삭제(Removed)
+   - 중지된 컨테이너를 삭제하는 명령어: **docker rm <컨테이너 이름 또는 ID>**
+   - 도커 이미지를 삭제하는 명령어: **docker rmi <이미지 이름>**
+
 ### 이미지란?
 - 코드, 런타임, 시스템 도구, 시스템 라이브러리 및 설정과 같은 응용 프로그램을 실행하는 데 필요한
   모든 것을 포함하는 가볍고 독립적이며 실행 가능한 소프트웨어 패키지
@@ -30,27 +51,28 @@
 #### Dockerfile
 > Document: https://docs.docker.com/engine/reference/builder/
 ```dockerfile
-# FROM: 새로운 이미지를 생성하기 위해 기반 이미지를 가져오는 데 사용
+# Docker 이미지를 빌드시 빌드 타임에 전달되는 변수를 정의하는 데 사용
+# <VAR NAME>: ARG로 정의할 변수의 이름
+# <DEALUT>: 선택적으로 정의할 수 있으며, 변수에 기본값을 할당합
+# ! ARG 명령어는 FROM 명령어 이전에 선언되어댜 한다.
+ARG <VAR NAME>=<DEALUT>
+
+# FROM: 새로운 이미지를 생성하기 위해 기반 이미지를 가져오는 데 사용한다.
 # image: 기반 이미지의 이름
 # tag: 명시하지 않을시 가장 최신(latest)형으로 자동 적용
 FROM <image>:<tag>
 
-# RUN: 이미지를 빌드할 때 컨테이너 내부에서 실행할 명령어를 지정
+# RUN: 이미지를 빌드할 때 컨테이너 내부에서 실행할 명령어를 지정한다.
 # 명령에는 소프트웨어 설치, 파일 및 디렉터리 만들기, 환경 구성 만들기와 같은 항목이 포함될 수 있다.
 RUN <command>
 
-# CMD: 컨테이너가 시작될 때 실행할 명령어를 지정
-# Dockerfile에서 CMD 명령을 여러 개 지정하는 경우 마지막 명령만 평가된다.
-CMD <command>
-
-# COPY: 호스트 파일 시스템에서 파일을 복사하여 Docker 이미지 내부로 복사
-
+# COPY: 호스트 파일 시스템에서 파일을 복사하여 Docker 이미지 내부로 복사한다.
 COPY <source> <destination>
 
 # ! 원본 또는 대상에 공백이 포함된 경우 다음 예제처럼 경로를 대괄호와 큰따옴표를 묶는다.
 COPY ["<source>", "<destination>"]
 
-# ADD: 호스트 파일 시스템에서 파일을 복사하여 Docker 이미지 내부로 복사
+# ADD: 호스트 파일 시스템에서 파일을 복사하여 Docker 이미지 내부로 복사한다.
 # - COPY와 유사하게 동작하지만, ADD는 COPY보다 더 다양한 기능을 제공한다.
 # - <source>가 파일 뿐 아니라 URL이나 압축 파일도 가능
 #   - URL(원격저장소) 경로 파일 다운로드 
@@ -63,7 +85,7 @@ ADD <source> <destination>
 # ! 원본 또는 대상에 공백이 포함된 경우 다음 예제처럼 경로를 대괄호와 큰따옴표를 묶는다.
 ADD ["<source>", "<destination>"]
 
-# 이미지 내부의 작업 디렉토리를 설정
+# 이미지 내부의 작업 디렉토리를 설정한다.
 # RUN, CMD 등 다른 Dockerfile 명령에 대한 작업 디렉터리를 설정하고 컨테이너 이미지의 실행 중인 인스턴스에 대한 작업 디렉터리도 설정
 # - Working Directory를 설정하는 이유
 #   - 베이스 이미지에 이미 같은 폴더명 혹은 파일명이 있을 가능성
@@ -72,13 +94,22 @@ ADD ["<source>", "<destination>"]
 WORKDIR <path to working directory>
 
 # 빌드 과정에서 사용될 환경 변수를 설정
-ENV <key> = <value>
-
-# Dockerfile 이스케이프 문자
-'\', '`'
+ENV <key>=<value>
+ 
+# Dockerfile 이스케이프 문자 : '\', '`' 
 # 여러줄에서 계속되는 RUN 명령어 예시
 RUN powershell.exe -Command \
-     $ErrorActionPreference = 'Stop';
+     $ErrorActionPreference = 'Stop'; 
+
+# Docker 이미지에서 실행되는 기본 실행 파일을 지정하는 데 사용한다.
+# CMD와 유사하게 동작하지만, CMD가 컨테이너가 실행될 때 실행되는 기본 명령어의 인수를 정의하는 데 사용되는 반면, 
+# ENTRYPOINT는 이미지에서 실행될 기본 실행 파일 자체를 정의한다.
+# ! 첫 번째 요소는 실행할 명령어이고, 나머지 요소는 해당 명령어에 전달할 매개 변수이다.
+ENTRYPOINT ["executable", "param1", "param2"]
+
+# CMD: 컨테이너가 시작될 때 실행할 명령어를 지정
+# Dockerfile에서 CMD 명령을 여러 개 지정하는 경우 마지막 명령만 평가된다.
+CMD ["executable","param1","param2"]
 ```
 
 ### Dockerfile을 이용해 도커 이미지 만들기
@@ -86,31 +117,10 @@ RUN powershell.exe -Command \
 $ docker build ./ 
 $ docker build .
 
-# 위의 명령어는 해당 디렉토리 내에서 DockerFile을 찾아서 도커 클라이언트에게 전달
+# 위의 명령어는 해당 디렉토리 내에서 Dockerfile을 찾아서 도커 클라이언트에게 전달
 # ~ '.', './' 경로 표현식은 모두 현재 디렉토리를 의미한다.
 # 정의된 내용을 도커 클라이언트에 전달하여 도커 서버가 인식 이미지가 생성된다.
 ```
-
-### 컨테이너의 생명주기
-1. 생성(Create)
-   - 도커 이미지를 기반으로 컨테이너를 생성하는 명령어: **docker create <이미지 이름>**
-2. 준비(Pending)
-   - 컨테이너 실행 전 준비 단계를 거치는 명령어는 따로 존재하지 않는다.
-3. 실행(Running)
-   - 컨테이너를 실행하는 명령어: **docker start <컨테이너 이름 또는 ID>**
-   - 실행 중인 컨테이너의 상태를 확인하는 명령어: **docker ps**
-4. 일시 중지(Paused)
-   - 실행 중인 컨테이너를 일시 중지하는 명령어: **docker pause <컨테이너 이름 또는 ID>**
-   - 일시 중지된 컨테이너를 다시 실행하는 명령어: **docker unpause <컨테이너 이름 또는 ID>**
-5. 중지(Stopped)
-   - 실행 중인 컨테이너를 중지하는 명령어: **docker stop <컨테이너 이름 또는 ID>**
-     -  stop 명령어는 컨테이너에 SIGTERM 신호를 보내서 그 컨테이너를 graceful하게 종료시키려고 시도
-   - 실행 중인 컨테이너를 강제종료하는 명령어: **docker kill <컨테이너 이름 또는 ID>**
-     - kill 명령어는 바로 SIGKILL 신호를 보내 컨테이너를 강제로 종료
-   - 중지된 컨테이너를 다시 시작하는 명령어: **docker start <컨테이너 이름 또는 ID>**
-6. 삭제(Removed)
-   - 중지된 컨테이너를 삭제하는 명령어: **docker rm <컨테이너 이름 또는 ID>**
-   - 도커 이미지를 삭제하는 명령어: **docker rmi <이미지 이름>**
 
 ### 자주 사용되는 명령어
 ```bash
@@ -218,6 +228,21 @@ $ docker rmi [옵션] <이미지명> [이미지명...]
 # <이미지명>: 이미지의 이름 또는 ID
 ```
 
+### 컨테이너 > 이미지 전체 삭제
+```bash
+# 모든 컨테이너를 중지
+$ sudo docker stop $(sudo docker ps -a -q)
+
+# 모든 컨테이너를 삭제
+$ sudo docker rm $(sudo docker ps -a -q)
+
+# 모든 이미지 삭제
+$ sudo docker rmi $(sudo docker images -q)
+
+# <none> 생성된 이미지 삭제 (실행중인 이미지 포함)
+$ docker image prune -a
+```
+
 #### 이미지에 이름 설정
 ```bash
 $ docker build -t new/image:latest ./
@@ -238,7 +263,7 @@ $ docker exec [옵션] <컨테이너 이름> <실행할 명령어>
 
 ### Volume
 컨테이너 안의 파일 변경 사항을 UnionFS을 통해 관리
-- COPY 는 로컬 리소스를 컨테이너에 복사하는 반면 Volume 은 리소스 맵핑을 통해 참조
+- COPY는 로컬 리소스를 컨테이너에 복사하는 반면 Volume은 리소스 맵핑을 통해 참조한다.
 ```bash
 # * Docker Volume을 생성
 $ docker volume create <volume-name>
@@ -251,7 +276,7 @@ $ docker run --name my-redis -d -p 8080:8080 -v my-redis:/data redis
 ```
 
 #### bind-mount 방식
-특정 Volume 을 생성하지않고 호스트의 특정 경로의 폴더를 공유하는것
+특정 Volume을 생성하지않고 호스트의 특정 경로의 폴더를 공유하는것
 ```bash
 $ docker run <option> -v <host-route>:<container-route> <image-name>
 
@@ -285,21 +310,21 @@ services:
 
 #### docker-compose 자주 사용되는 명령어
 ```bash
-# * 정의된 내용을 기반으로 이미지를 빌드
+# * 정의된 내용을 기반으로 이미지를 빌드한다.
 $ docker-compose build
 
-# * 이미지가 존재하지 않을 경우 빌드를 진행하고(이미지 존재시 빌드 생략), 컨테이너를 시작
+# * 이미지가 존재하지 않을 경우 빌드를 진행하고(이미지 존재시 빌드 생략), 컨테이너를 시작한다.
 $ docker-compose up
 
-# * 강제로 이미지 빌드하며, 컨테이너 시작
+# * 강제로 이미지 빌드하며, 컨테이너 시작한다.
 $ docker-compose up --build
 
-# * 이미지 빌드 없이, 컨테이너 시작 (이미지가 존재하지 않을시 실패한다.)
+# * 이미지 빌드 없이, 컨테이너 시작한다. (이미지가 존재하지 않을시 실패한다.)
 $ docker-compose up --no-build
 
-# * detached 모드, 백그라운드 실행 (애플리케이션 실행 결과 output 출력 X)
+# * detached 모드, 백그라운드 실행한다. (애플리케이션 실행 결과 output 출력 X)
 $ docker-compose up -d
 
-# * docker compose 종료
+# * docker compose 종료한다.
 $ docker-compose down
 ```

@@ -11,6 +11,11 @@ $ nginx -v
 # nginx 활성화 & 실행
 $ sudo systemctl enable nginx
 $ sudo service nginx start
+
+# 사용중인 포트 번호 확인
+$ sudo lsof -i :{port}
+
+# nginx 실행 확인
 $ service nginx status 
 
 # nginx 설정 파일 분석(오류 검증)
@@ -78,9 +83,16 @@ $ sudo vim /etc/nginx/nginx.conf
 http {
     ...
     
-    # server_names_hash_bucket_size 64; -> # 해시 버킷 메모리 이슈 발생 시 주석 제거 
+    # server_names_hash_bucket_size 64; # 해시 버킷 메모리 이슈 발생 시 주석 제거 
     
     ...
+    
+    ##
+    # Virtual Host Configs
+    ##
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*; # 도메인 파일 등록 (Symlinks) 경로 설정 확인
 }
 ```
 
@@ -135,23 +147,17 @@ server {
     # listen [::]:80; IPv6
     server_name {domain...};
     
-    # root /usr/share/nginx/html;
-    
-    access_log /var/log/nginx/proxy/access.log;
-    error_log /var/log/nginx/proxy/error.log;
-    
     # Load configuration files for the default server block.
     include /etc/nginx/conf.d/service-url.inc;
   
     location / {
-        include /etc/nginx/proxy_params;
-        
-        proxy_pass $service_url;
-        
-        # http -> https 
         if ($http_x_forwarded_proto != 'https') {
             return 301 https://$host$request_uri;
         }
+        
+        include /etc/nginx/proxy_params;
+        
+        proxy_pass $service_url;
     }
 }
 ```
@@ -195,6 +201,21 @@ Let's Encrypt 인증 기관에서는 무료로 인증서를 발급하고 있으�
 
 > document: [https://certbot.eff.org](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
 
+#### ACME (Automatic Certificate Management Environment) 프로토콜 
+브라우저에서 HTTPS를 지원하는 웹사이트에서 사용하는 SSL/TLS 인증서 발급 및 관리 프로토콜
+
+ACME 프로토콜은 Let's Encrypt라는 공인 인증 기관에서 만들어졌으며, 기존의 SSL/TLS 인증서 발급 방식보다 보다 쉽고 빠르게 SSL/TLS 인증서를 발급 받을 수 있도록 지원한다.
+
+#### 인증서 발급 절차
+1. 웹사이트에서 ACME 클라이언트를 통해 인증서 발급 요청
+2. 인증기관 서버가 요청을 검증 후 도메인 소유 확인을 위해 도메인 인증서 생성을 요청
+3. 클라이언트는 발급 요청 도메인의 웹 서버에 인증서를 생성하고 이를 확인 받는다.
+4. 클라이언트는 인증기관 서버에 인증서가 잘 생성되었다는 것을 확인 후 인증서 발급
+5. 발급받은 인증서를 서버에 설치하여 HTTPS 암호화 통신이 가능해진다.
+
+ACME 프로토콜은 간단하고 자동화된 인증서 발급 방식을 지원하여 많은 웹사이트에서 사용되고 있다. 
+무료로 SSL/TLS 인증서를 발급 받을 수 있어서 SSL/TLS 보안 연결을 사용하는 모든 웹사이트에서 권장되고 있다.
+
 ```bash
 # core 설치
 $ sudo snap install core; sudo snap refresh core
@@ -220,9 +241,18 @@ $ systemctl list-timers
 > sudo certbot --nginx 도메인 등록시 healthcheck 경로 이슈 발생 가능
 > 이슈 발생시 하단 서버 블록 **location ~ /.well-known/acme-challenge/** 추가 후 재검증 진행
 
-#### 서버 블록 생성 (listen 443 ssl;)
+### **location 우선순위**
+1. = : 정확히 일치
+2. ^~ : URI 경로의 접두사가 매칭
+3. ~ : 정규표현식(case-sensitive)
+4. ~* : 정규표현식(case-insensitive)
+5. / : 기본
 
+#### 서버 블록 생성 (listen 443 ssl;)
 ```bash
+# certbot webroot 경로 생성
+$ sudo mkdir -p /var/www/certbot/.well-known/acme-challenge
+
 # Remote Host 사용 파일 편집시 업로드 권한 설정 선행
 $ sudo chmod 777 /etc/nginx/sites-available/{domain}
 
@@ -231,7 +261,6 @@ $ sudo vi /etc/nginx/sites-available/{domain}
 
 server {
     listen 80;
-    # Managed by certbot
     listen 443 ssl;
     
     server_name {domain...};
@@ -239,7 +268,6 @@ server {
     access_log /var/log/nginx/proxy/access.log;
     error_log /var/log/nginx/proxy/error.log;
     
-    # Load configuration files for the default server block.
     include /etc/nginx/conf.d/service-url.inc;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     
@@ -247,17 +275,18 @@ server {
     ssl_certificate /etc/letsencrypt/live/{domain}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/{domain}/privkey.pem;
     
-    location / {
-        proxy_pass $service_url;
-    }
-    
     # certbot 인증서 발급 (healthcheck 기본 경로)
-    location ~ /.well-known/acme-challenge/ {
-        allow all;
-        root /var/www/html;
+    location = /.well-known/acme-challenge/ {
+        default_type "text/plain";
+        root /var/www/certbot;
+        
         try_files $uri = 404;
-
+        
         break;
     }
+    
+    location / {
+        proxy_pass $service_url;
+    }   
 }
 ```
