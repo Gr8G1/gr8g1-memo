@@ -59,6 +59,7 @@
 
 ## Redis
 - [Redis - Redis란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/redis/redis.md)
+- [Redis - Redis - EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/redis/redis-ec2-ubuntu.md)
 
 ## Spring
 - [Spring - Spring이란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/spring/spring.md)
