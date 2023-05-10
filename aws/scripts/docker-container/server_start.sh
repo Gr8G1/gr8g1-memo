@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-
-source $(dirname "$(readlink -f "$0")")/profile.sh
+source "$(dirname "$(readlink -f "$0")")/profile.sh"
 
 PROFILE_AND_PORT=$(find_profile_and_port)
-CURRENT_PROFILE=$(echo "${PROFILE_AND_PORT}" | awk '{print $1}')
+ACTIVE_PROFILE=$(echo "${PROFILE_AND_PORT}" | awk '{print $1}')
 
-sudo docker-compose -p ${IMAGE_NAME | PROJECT_NAME}-${CURRENT_PROFILE} -f ${ABS_PATH}/docker-compose.${CURRENT_PROFILE}.yml up --build -d
+docker-compose -p ${SERVICE_NAME}-${ACTIVE_PROFILE} -f /home/ubuntu/build/docker-compose.${ACTIVE_PROFILE}.yml up --build -d

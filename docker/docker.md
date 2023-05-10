@@ -306,6 +306,11 @@ services:
     working_dir: /dir
     volumes:
       - ./:/dir
+      
+networks:
+  default:
+    external:
+      name: service-default
 ```
 
 #### docker-compose 자주 사용되는 명령어

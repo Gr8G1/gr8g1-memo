@@ -37,5 +37,5 @@ entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & 
 
 ```bash
 # Docker 실행중인 컨테이너의 적용된 내용 확인 
-$ sudo docker container inspect <컨테이너 이름>     # :JSON 출력
+$ sudo docker container inspect <컨테이너 이름>                 # :JSON 출력
 ```
