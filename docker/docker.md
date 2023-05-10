@@ -325,6 +325,45 @@ $ docker-compose up --no-build
 # * detached 모드, 백그라운드 실행한다. (애플리케이션 실행 결과 output 출력 X)
 $ docker-compose up -d
 
-# * docker compose 종료한다.
-$ docker-compose down
+# * docker compose 종료한다. 
+$ docker-compose down {:container_name}
+
+# down 절차 
+# 실행 중인 Docker 컨테이너를 모두 정지
+# 정지된 Docker 컨테이너를 모두 삭제
+# Docker 네트워크를 삭제
+# Docker 볼륨을 삭제
+```
+
+### Docker Network
+도커 네트워크(Docker Network)는 도커 컨테이너들 간의 네트워크 통신을 위한 가상 네트워크를 말한다.
+
+도커에서는 기본적으로 3가지 종류의 네트워크를 제공한다.
+
+1. bridge network: 
+   - 기본적으로 제공되는 네트워크
+   - 컨테이너들이 동일한 가상 네트워크에 속하며, 기본적으로 IP 주소가 할당된다.
+2. host network 
+   - 호스트의 네트워크 인터페이스를 사용하는 네트워크
+   - 컨테이너가 호스트와 동일한 네트워크 인터페이스를 사용하기 때문에 IP 주소를 할당하지 않는다.
+3. overlay network
+   - 여러 호스트 간에 컨테이너를 연결하는 데 사용된다. 
+   - 여러 호스트 간에 컨테이너 간에 통신을 위해 오버레이 네트워크를 설정하고, 컨테이너들이 이 네트워크에 속하게 된다.
+
+```bash
+# 네트워크 목록
+$ docker network ls
+
+# 네트워크 정보 확인
+$ docker network inspect <NAME>
+
+# 네트워크 생성
+$ docker network create <NETWORK_NAME>
+
+# 컨테이너를 생성할 때 --network 옵션을 사용하여 컨테이너가 속할 네트워크를 지정할 수 있다.
+$ docker run --name my-container --network my-network my-image
+
+# 컨테이너끼리 통신할 때는 컨테이너 이름으로 통신한다. 
+# Ex) my-container라는 이름의 컨테이너에서 my-other-container라는 이름의 컨테이너로 통신하려면 다음과 같이 입력한다.
+$ curl http://my-other-container:8080
 ```

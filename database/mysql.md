@@ -41,7 +41,7 @@ $ mysql -V
 
 ### User 생성 및 확인
 데이터베이스(스키마) 생성
-```sql
+```mysql
 -- 데이터베이스 사용자 확인
 USE mysql;
 SELECT user, host FROM user;
@@ -83,7 +83,7 @@ spring:
     driver-class-name: "com.mysql.jdbc.Driver"
  jpa:
    database: mysql
-   database-platform: org.hibernate.dialect.MySQL8Dialect      // ! DB 버전별 상이 mysql -V 확인
+   database-platform: org.hibernate.dialect.MySQL8Dialect           # ! DB 버전별 상이 mysql -V 확인
    hibernate:
      ddl-auto: update
    show-sql: true
