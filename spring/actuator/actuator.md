@@ -42,6 +42,16 @@
 ### 액추에이터 엔드포인트 목록
 > document: [actuator.endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints)
 
+### 액추에이터와 마이크로미터가 제공하는 메트릭정보
+1. JVM 메트릭
+2. 시스템 메트릭
+3. 애플리케이션 시작 메트릭
+4. 스프링 MVC 메트릭
+5. 톰캣 메트릭
+6. 데이터 소스 메트릭
+7. 로그 메트릭
+
+> 이외 다양한 메트릭을 제공하고 사용자 정의 메트릭 생성도 가능하다.
 
 ### 액추에이터 보안 이슈
 잘못된 설정으로 정보들로 인해 액추에이터 엔드포인트(Ex: env, heapdump, shutdown ...) 활성화시 API Key, Token 정보, 내부 서비스 도메인, IP Address와 같은 중요 정보들이 유출될 수 있으며 서비스를 강제로 중단될 수 있는 위험에 노출 될 수 있다.

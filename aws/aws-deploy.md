@@ -206,10 +206,12 @@ $ free -h
 
 ### EC2 Security-group 설정 : 80 -> 8080 포트 포워딩
 ```bash
-// # 포트 할당
+# 포트 할당
 $ sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-
-// 할당된 포트 확인
+# 포트 제거
+$ sudo iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+ 
+# 포트 확인
 $ sudo iptables -t nat -L --line-numbers
 ```
 
