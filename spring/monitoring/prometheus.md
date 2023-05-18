@@ -21,7 +21,7 @@ IT 인프라 및 시스템의 상태와 성능을 모니터링하고 분석하�
 
 ### 프로메테우스 아키텍처
 <div style="text-align: center">
-  <p><img width="424"  alt="prometheus-architecture" src="https://github.com/Gr8G1/gr8g1-memo/assets/29472238/7ac9fb36-16c9-4dab-94f1-d48f2e798998"></p>
+  <p><img width="550"  alt="prometheus-architecture" src="https://github.com/Gr8G1/gr8g1-memo/assets/29472238/7ac9fb36-16c9-4dab-94f1-d48f2e798998"></p>
   <p>출처: <a href="https://prometheus.io/docs/introduction/overview/">prometheus</a></p>
 </div>
 
