@@ -1,4 +1,4 @@
-package Gr8G1.prac.playground.algorithm.bj;
+package Gr8G1.prac.playground.bj.io;
 
 // # Q: https://www.acmicpc.net/problem/2257
 public class CQ_2257 {

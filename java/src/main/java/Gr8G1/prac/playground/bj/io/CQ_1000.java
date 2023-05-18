@@ -1,9 +1,9 @@
-package Gr8G1.prac.playground.algorithm.bj;
+package Gr8G1.prac.playground.bj.io;
 
 import java.util.Scanner;
 
-// # Q: https://www.acmicpc.net/problem/10998
-public class CQ_10998 {
+// # Q: https://www.acmicpc.net/problem/1000
+public class CQ_1000 {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
@@ -13,6 +13,6 @@ public class CQ_10998 {
     a = sc.nextInt();
     b = sc.nextInt();
 
-    System.out.println(a * b);
+    System.out.println(a + b);
   }
 }

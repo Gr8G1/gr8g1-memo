@@ -1,4 +1,4 @@
-package Gr8G1.prac.playground.algorithm.bj;
+package Gr8G1.prac.playground.bj.io;
 
 import java.util.Scanner;
 

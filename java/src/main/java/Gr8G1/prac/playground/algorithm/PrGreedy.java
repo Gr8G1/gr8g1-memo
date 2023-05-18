@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class PrGreddy {
+public class PrGreedy {
   /*
    * # 탐욕 알고리즘
    *
@@ -17,10 +17,10 @@ public class PrGreddy {
    *  2. 적절성 검사(Feasibility Check): 선택된 해가 문제의 조건을 만족하는지 검사
    *  3. 해답 검사(Solution Check): 문제가 해결되었는지 검사하고, 해결되지 않았다면 선택 절차로 돌아가 과정 반복
    *
-   * 탐욕 알고리즘 구현시 최적의 결과를 보장(최소) 받을 수 있는 2가지 조건
+   * 탐욕 알고리즘 구현시 최적의 결과를 보장(최소) 받을 수 있는 3가지 조건
    *  1. 탐욕적 선택 속성(Greedy Choice Property) : 이전의 선택이 이후의 선택에 영향을 주지 않는다.
    *  2. 최적 부분 구조(Optimal Substructure) : 문제에 대한 최종 해결 방법은 부분 문제에 대한 최적 문제 해결 방법으로 구성한다.
-   *
+   *  3. 탐욕적 선택과 최적 부분 구조의 조합: 각 단계에서 탐욕적인 선택을 하면서 최적 부분 구조를 유지하는 경우, 전체적인 최적해를 찾을 수 있다.
    */
 
   // 박스포장
