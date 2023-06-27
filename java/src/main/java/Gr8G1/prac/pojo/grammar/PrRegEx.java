@@ -185,5 +185,14 @@ public class PrRegEx {
     String t2 = "캘린더 제목1, String, Optional";
     String s2 = t2.replaceAll(",\\s*Optional$", "");
     System.out.println("s2 = " + s2);
+
+    String my_string = "ihrhbakrfpndopljhygc";
+    String[] split = my_string.split("(?<=\\G.{4})");
+    // (?<=...): 긍정형 전방탐색 구문
+    //  - 즉, 일치하는 패턴을 찾을 때 이전에 일치한 위치를 찾는 것
+    // \G: 이전 일치한 위치에서 시작하는 것을 의미
+    //  - \G는 전체 문자열의 시작 부분과 첫 번째 일치하지 않는 위치 이후의 위치를 구분한다.
+    // .{4}: 임의의 문자 4개를 나타내는 패턴
+    //  - .은 어떤 문자든 하나를 의미하고, {4}는 앞에 오는 패턴이 정확히 4번 반복되어야 함을 나타낸다.
   }
 }

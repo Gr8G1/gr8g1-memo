@@ -126,7 +126,9 @@ public class PrMathWith {
   public static void main(String[] args) {
     permu(new int[] {1, 2, 3}, 3, 2);
     permRe(new int[] {1, 2, 3}, 3, 3);
+
     System.out.println();
+
     combi(new int[] {1, 2, 3}, 3, 2);
     combiRe(new int[] {1, 2, 3}, 3, 2);
   }

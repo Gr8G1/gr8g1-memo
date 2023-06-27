@@ -1,15 +1,14 @@
 package Gr8G1.prac.pojo.grammar;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class PrDate {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ParseException {
     // Java 시간 관련 모듈 변화 흐름
     // java.util.Date > java.util.Calendar > java.time(org.joda.time)
 
@@ -61,7 +60,6 @@ public class PrDate {
     LocalDate parse = LocalDate.parse("20191224", DateTimeFormatter.BASIC_ISO_DATE);
     System.out.println("parse = " + parse);
 
-
     // String -> LocalDateTime
     LocalDateTime.parse("2019-12-25T10:15:30");
     LocalDateTime.parse("2019-12-25 12:30:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -84,5 +82,38 @@ public class PrDate {
 
     System.out.println("startOfDay = " + startOfDay);
     System.out.println("endOfDay = " + endOfDay);
+
+    LocalDate d1 = LocalDate.of(2023, 1, 13);
+    LocalDate d2 = LocalDate.of(2023, 1, 14);
+
+    LocalDateTime dt1 = d1.atStartOfDay();
+    LocalDateTime dt2 = d2.atStartOfDay();
+
+    int comparison = dt1.compareTo(dt2);
+
+    if (comparison < 0) {
+      System.out.println("d1 is before d2");
+    } else if (comparison > 0) {
+      System.out.println("d1 is after d2");
+    } else {
+      System.out.println("d1 and d2 are the same");
+    }
+
+    String dateTimeString = "2023-05-31T07:56:16.459+00:00";
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    Date date = sdf.parse(dateTimeString);
+    Instant instant = date.toInstant();
+    ZonedDateTime localDateTime = instant.atZone(ZoneId.systemDefault());
+    System.out.println(localDateTime);
+
+
+    LocalDateTime startAt = LocalDateTime.of(2023, 6, 2, 0, 0, 0);
+    long startAtEpochMillis = startAt.toInstant(ZoneOffset.UTC).toEpochMilli();
+
+    System.out.println(startAtEpochMillis); // 출력: 1685664000000
+
+    LocalDateTime EpochDateTime = Instant.ofEpochMilli(startAtEpochMillis).atZone(ZoneOffset.UTC).toLocalDateTime();
+
+    System.out.println("EpochDateTime = " + EpochDateTime);
   }
 }

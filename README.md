@@ -20,6 +20,7 @@
 - [Database - Database란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/database/database.md)
 - [Database - Sql](https://github.com/Gr8G1/gr8g1-memo/blob/main/database/sql.md)
 - [Database - Mysql](https://github.com/Gr8G1/gr8g1-memo/blob/main/database/mysql.md)
+- [Database - H2](https://github.com/Gr8G1/gr8g1-memo/blob/main/database/h2.md)
 
 ## Docker
 - [Docker - Docker란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker.md)

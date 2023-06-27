@@ -967,7 +967,7 @@ public class PrPlayGround {
     return Objects.requireNonNull(t.pollFirst()).intValue();
   }
 
-  // Segement Tree && Sparse Table 구현
+  // Segment Tree && Sparse Table 구현
   public static int[] rangeMin(int[] arr, int[][] range) {
     // O(N)
     // return Arrays.stream(range).map((r) -> {
