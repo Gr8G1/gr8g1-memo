@@ -24,4 +24,11 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    public void addTeam(Team team) {
+        this.team = team;
+
+        if (!team.getUsers().contains(this))
+            team.getUsers().add(this);
+    }
 }
