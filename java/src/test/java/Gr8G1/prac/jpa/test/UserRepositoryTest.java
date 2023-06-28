@@ -7,9 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
@@ -27,13 +25,13 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     @Rollback(value = false)
-    public void userTest() {
+    public void createTest() {
         Team newTeam = Team.builder()
                            .teamName("Team" + Math.random() * 10)
                            .users(new ArrayList<>())
                            .build();
 
-        User user = User.builder()
+        User user1 = User.builder()
                          .userName("User1" + Math.random() * 10)
                          .build();
 
@@ -41,8 +39,13 @@ public class UserRepositoryTest {
                         .userName("User2" + Math.random() * 10)
                         .build();
 
-        user.addTeam(newTeam);
+        User user3 = User.builder()
+                         .userName("User3" + Math.random() * 10)
+                         .build();
+
+        user1.addTeam(newTeam);
         user2.addTeam(newTeam);
+        user3.addTeam(newTeam);
 
         teamRepository.save(newTeam);
 
@@ -63,19 +66,19 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     @Rollback(value = false)
-    public void findTeam() {
+    public void findTest() {
         // * N + 1 : 사이즈 제어
         // application.yml : spring.jpa.properties.hibernate.default_batch_fetch_size: {size}
         // in ( ?, ? ...) 이용해 조회된다.
-        // List<Team> allTeam = teamRepository.findAll();
-        //
-        // allTeam.forEach(v -> {
-        //     System.out.println("team = ID: " + v.getTeamId() + " / name: " + v.getTeamName());
-        //
-        //     for (User u : v.getUsers()) {
-        //         System.out.println("User = ID: " + u.getUserId() + " / name: " + u.getUserName());
-        //     }
-        // });
+        List<Team> allTeam = teamRepository.findAll();
+
+        allTeam.forEach(v -> {
+            System.out.println("team = ID: " + v.getTeamId() + " / name: " + v.getTeamName());
+
+            for (User u : v.getUsers()) {
+                System.out.println(" - User = ID: " + u.getUserId() + " / name: " + u.getUserName());
+            }
+        });
 
         // * N + 1 : join fetch (페치 조인)
         // @Query("select t from Team t join fetch t.users") 쿼리를 직접 작성해 조회한다.
@@ -107,9 +110,32 @@ public class UserRepositoryTest {
     @Test
     @Transactional
     @Rollback(value = false)
-    public void deleteUser() {
-        Optional<User> byId = userRepository.findById(1L);
-        User user = byId.get();
+    public void updateTest() {
+        Team team = teamRepository.findByTeamIdFetchJoin(3L);
+
+        // * ConcurrentModificationException 처리를 위한 new ArrayList 생성
+        ArrayList<User> users = new ArrayList<>(team.getUsers());
+        users.forEach(User::removeTeam);
+
+        // * 연관관계 제거 Cascade 전파 이슈로 팀 정보 선행 저장
+        teamRepository.save(team);
+        userRepository.deleteAll(users);
+
+        // * 연관관계가 정리된 기존 팀 객체에 새로운 연관관계 맵핑
+        User newUser = User.builder()
+                           .userName("newUser" + Math.random() * 10)
+                           .build();
+
+        newUser.updateTeam(team);
+
+        userRepository.save(newUser);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    public void deleteTest() {
+        User user = userRepository.findById(1L).get();
 
         userRepository.delete(user);
     }

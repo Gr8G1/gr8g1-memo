@@ -18,11 +18,6 @@ public class Team {
 
     private String teamName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team", cascade = {CascadeType.PERSIST, CascadeType.REMOVE })
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team", cascade = { CascadeType.PERSIST })
     private List<User> users = new ArrayList<>();
-
-    public void addUser(User user) {
-        if (!this.users.contains(user))
-            this.users.add(user);
-    }
 }

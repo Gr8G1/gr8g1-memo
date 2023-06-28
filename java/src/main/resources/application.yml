@@ -20,3 +20,4 @@ spring:
 logging:
   level:
     org.hibernate.SQL: trace
+    org.hibernate.type.descriptor.sql.BasicBinder: trace

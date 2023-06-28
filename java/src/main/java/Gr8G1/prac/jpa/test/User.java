@@ -3,12 +3,13 @@ package Gr8G1.prac.jpa.test;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Table(name = "USERS")
 public class User {
     @Id
@@ -21,7 +22,7 @@ public class User {
     // CascadeType.PERSIST : Team 객체 참조된 상태면 Team 객체에 정보 또한 DB에 저장된다.
     // @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     // CascadeType.REMOVE : User 정보가 삭제될 때 Team 객체 또한 DB에서 제거된다.
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
@@ -31,4 +32,27 @@ public class User {
         if (!team.getUsers().contains(this))
             team.getUsers().add(this);
     }
+
+    public void updateTeam(Team team) {
+        if (this.team != null)
+            this.team.getUsers().remove(this);
+
+        this.team = team;
+        team.getUsers().add(this);
+    }
+
+    public void removeTeam() {
+        if (this.team != null) {
+            this.team.getUsers().remove(this);
+            this.team = null;
+        }
+    }
+
+    // @Override
+    // public boolean equals(Object o) {
+    //     if (this == o) return true;
+    //     if (o == null || getClass() != o.getClass()) return false;
+    //     User user = (User) o;
+    //     return Objects.equals(userId, user.userId);
+    // }
 }

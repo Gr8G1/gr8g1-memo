@@ -8,4 +8,7 @@ import java.util.List;
 public interface TeamRepository extends JpaRepository<Team, Long> {
     @Query("select t from Team t join fetch t.users")
     List<Team> findAllFetchJoin();
+
+    @Query("select t from Team t join fetch t.users where t.teamId = :teamId")
+    Team findByTeamIdFetchJoin(Long teamId);
 }
