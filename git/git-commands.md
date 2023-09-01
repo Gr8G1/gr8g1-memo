@@ -20,5 +20,5 @@ alias la='ls -al'
 alias gst='git status'
 alias gra='git restore .'
 alias gba='git branch -a'
-alias gla='git log --branches --graph --decorate --date-order --date=format:"%Y-%m-%d %H:%M:%S" --pretty=format:"%C(auto)%d [%C(bold yellow)%h%C(reset)] - %C(white)%s %C(magenta)[%C(bold green)%an : %C(bold red)%ar%C(magenta)]"'
+alias gla='git log --graph --decorate --date-order --date=format:"%Y-%m-%d %H:%M:%S" --pretty=format:"%C(auto)%d [%C(bold yellow)%h%C(reset)] - %C(white)%s %C(magenta)[%C(bold green)%an : %C(bold red)%ar%C(magenta)]"'
 ```
