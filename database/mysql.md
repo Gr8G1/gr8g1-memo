@@ -78,6 +78,7 @@ dependencies {
 spring:
   datasource:
     url: "jdbc:mysql://${location}:${port}/${dbname}?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul"
+    # DBeaver: &allowPublicKeyRetrieval=true
     username:
     password:
     driver-class-name: "com.mysql.jdbc.Driver"
