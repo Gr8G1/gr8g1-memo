@@ -92,7 +92,7 @@ public class UserRepositoryTest {
         //     }
         // });
 
-        // List<User> allUser =  userRepository.findAll();
+        // List<User> allUser = userRepository.findAll();
         //
         // allUser.forEach(v -> {
         //     System.out.println("User = ID: " + v.getUserId() + " / name: " + v.getUserName());

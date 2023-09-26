@@ -199,7 +199,33 @@ Stateless 한 HTTP 프로토콜의 특징과 대비되는 Stateful 한 상태를
 > Set-Cookie: [https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Set-Cookie](https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Set-Cookie)
 
 ### CORS
-브라우저의 자발적 보안조치 (특정 확장 프로그램으로 CORS 사용을 중지할 수 있다)
+CORS(Cross-Origin Resource Sharing)는 웹 애플리케이션에서 다른 도메인의 리소스에 접근하는 것을 허용하기 위한 보안 기술 및 정책입니다. 
+웹 페이지는 보안상의 이유로 동일 출처 원칙(Same-Origin Policy)에 따라 다른 도메인의 리소스에 직접 접근하지 못하도록 제한됩니다. 
+그러나 CORS를 사용하면 웹 애플리케이션은 동일 출처 원칙을 우회하여 다른 도메인의 리소스에 안전하게 접근할 수 있습니다.
+
+Origin (출처)
+웹 페이지가 로드되는 도메인을 나타냅니다. 
+이것은 프로토콜 (HTTP 또는 HTTPS), 호스트 (도메인 또는 IP 주소), 포트 (포트 번호)의 조합으로 구성됩니다. 
+예를 들어, https://www.example.com은 하나의 출처입니다.
+
+CORS 요청 (CORS Request)
+웹 페이지에서 다른 도메인의 리소스를 요청하는 HTTP 요청입니다. 
+이러한 요청은 브라우저에 의해 보내집니다.
+주요한 CORS 요청은 다음과 같습니다.
+
+- Simple Request (간단한 요청): HTTP 메서드 중 GET, HEAD, POST 중 하나를 사용하고, 특정 헤더를 제외하고 표준 헤더만을 사용하는 요청입니다. 브라우저는 이러한 요청을 자동으로 처리하고 승인합니다.
+- Preflight Request (사전 요청): 복잡한 요청에 해당하며, 브라우저는 사전 요청을 보내서 서버에서 이 요청을 허용하는지 확인합니다.
+
+CORS 응답 (CORS Response)
+서버에서 브라우저로 보내지는 응답입니다. 
+이 응답은 다른 도메인의 리소스에 대한 접근 권한 및 허용되는 도메인을 명시합니다. 
+CORS 응답은 다음과 같은 헤더를 포함할 수 있습니다.
+
+- Access-Control-Allow-Origin: 요청을 허용하는 출처(도메인) 목록을 지정합니다. 이 헤더가 없거나 출처에 포함되지 않으면 브라우저는 접근을 거부합니다.
+- Access-Control-Allow-Methods: 허용된 HTTP 메서드를 지정합니다.
+- Access-Control-Allow-Headers: 허용된 요청 헤더를 지정합니다.
+- Access-Control-Allow-Credentials: 인증 정보 (쿠키, HTTP 기본 인증 등)를 요청에 포함시킬 수 있는지 여부를 나타냅니다.
+
 > Cors: [https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
 ### HTML Form 제약
