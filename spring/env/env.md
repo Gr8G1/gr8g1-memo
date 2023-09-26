@@ -35,6 +35,6 @@ sourceSets {
 
 #### build & boot
 ```bash
-$ ./gradlew clean bootJar -Pprofile={환경}
+$ ./gradlew clean bootJar || build -Pprofile={실행환경}
 $ java -jar build/libs/{buildFile}.jar
 ```

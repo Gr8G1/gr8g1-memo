@@ -111,17 +111,24 @@ public class UserRepositoryTest {
     @Transactional
     @Rollback(value = false)
     public void updateTest() {
-        Team team = teamRepository.findByTeamIdFetchJoin(3L);
+        Team team = teamRepository.findByTeamIdFetchJoin(4L);
 
         // * ConcurrentModificationException 처리를 위한 new ArrayList 생성
         ArrayList<User> users = new ArrayList<>(team.getUsers());
         users.forEach(User::removeTeam);
 
-        // * 연관관계 제거 Cascade 전파 이슈로 팀 정보 선행 저장
-        teamRepository.save(team);
-        userRepository.deleteAll(users);
+        // ! 연관관계 추가 (신규 사용자) 연결시 아이디 생성 정상은 정상이지만 team_id, user_name 은 null로 정보가 저장된다
+        // User newUser = User.builder()
+        //                    .userName("newUser" + Math.random() * 10)
+        //                    .build();
+        //
+        // newUser.addTeam(team);
 
-        // * 연관관계가 정리된 기존 팀 객체에 새로운 연관관계 맵핑
+        // * 연관관계 제거 Cascade 전파 이슈로 팀 정보 선행 저장
+        // teamRepository.save(team);
+        // userRepository.deleteAll(users);
+
+        // * 연관관계가 정리된 기존 팀 객체에 새로운 연관관계 맵핑 (정상)
         User newUser = User.builder()
                            .userName("newUser" + Math.random() * 10)
                            .build();
