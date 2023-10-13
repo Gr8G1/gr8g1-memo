@@ -40,6 +40,15 @@ git submodule update --init --recursive
 git submodule update --remote --rebase
 ```
 
+- 삭제
+``` 
+git submodule deinit -f <서브모듈 경로>
+rm -rf <서브모듈 디렉토리>
+rm .gitmodules
+  - 하위 서브모듈 없을경우 삭제 
+git rm --cached <서브모듈 디렉토리>
+```
+
 - 상태확인
 ```
 git submodule status
