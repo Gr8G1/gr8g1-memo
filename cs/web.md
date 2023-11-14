@@ -99,6 +99,30 @@
        클라이언트는 다음 요청 시 지문을 서버에 전송하기만 하면 된다. 지문이 여전히 동일한 경우 리소스가 변경되지 않고 이 다운로드를 건너뛸 수 있다.
        - Ex: 클라이언트에 최대 120초 동안 캐시하도록 지시하고, 응답이 만료된 후 리소스가 수정되었는지 확인하는 데 사용할 수 있는 유효성 검사 토큰('x456dff')을 제공한다.
 
-#### 캐시 무효화
-  - Cache-Control: no-cache, no-store, must-revalidate  
-    Pragma: no-cache
+#### WEB 캐시 무효화
+``` html
+#
+<!-- Cache-Control
+    no-cache : 캐시를 사용하기 전에 재검증을 위한 요청을 강제
+    no-store : 클라이언트의 요청, 서버의 응답 등을 일체 저장하지 않음
+    must-revalidate : 캐시를 사용하기 전에 반드시 만료된 것인지 검증
+    
+    Ex) Cache-Control: no-cache, no-store, must-revalidate
+-->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
+<!-- Expires
+    리소스가 validate 하지 않다고 판단할 시간을 설정함
+    유효하지 않은 날짜 포맷(0)과 같은 경우 리소스가 만료 되었음을 의미함.
+    
+    Ex) Expires: Wed, 21 Oct 2015 07:28:00 GMT
+-->
+<meta http-equiv="Expires" content="0">
+
+<!-- 
+    HTTP 1.0 버전에서 HTTP 1.1의 Cache-Control 헤더와 같은 역할을 함
+    
+    Ex) Pragma: no-cache
+-->
+<meta http-equiv="Pragma" content="no-cache">
+```

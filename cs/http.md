@@ -286,3 +286,14 @@ CORS 응답은 다음과 같은 헤더를 포함할 수 있습니다.
     
 > Retry-After 헤더 필드에 복구 시간을 알릴 수 있음 (현실적으로 예측 불가)
 > 응답 코드 참조: [https://developer.mozilla.org/ko/docs/Web/HTTP/Status](https://developer.mozilla.org/ko/docs/Web/HTTP/Status)
+
+#### Http Header 캐시 컨트롤
+```
+# Doc: https://www.rfc-editor.org/rfc/rfc9111#name-cache-control
+# Ex: Axios interceptors.request
+
+config.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+config.headers['Expires'] = '0'
+config.headers['Pragma'] = 'no-cache'
+
+```
