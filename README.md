@@ -27,6 +27,10 @@
 - [Docker - Docker EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker-ec2-ubuntu.md)
 - [Docker - Docker & Nginx & Certbot](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker-nginx-certbot.md)
 
+## Git
+- [Git - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/git/git-commands.md)
+- [Git - GitHub SSH 키 교체(macOS)](https://github.com/Gr8G1/gr8g1-memo/blob/main/git/git-ssh.md)
+
 ## GitHub Actions
 - [GitHub Actions - GitHub Actions란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/github-actions.md)
 - [GitHub Actions - Frontend-CI/CD](https://github.com/Gr8G1/gr8g1-memo/blob/main/github-actions/frontend-cicd.md)
@@ -43,7 +47,7 @@
 - [Java - 어노테이션](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/annotation/annotation.md)
 - [Java - 람다](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/lambda/lambda.md)
 - [Java - 쓰레드](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/thread/thread.md)
-- [Java - 파일 I/O](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/fileIO/fileIO.md)
+- [Java - 파일 I/O](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/fileIO/PrFileIO.md)
 
 ## Linux
 - [Linux - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/linux/linux-commands.md)
@@ -58,9 +62,15 @@
 ## QueryDsl
 - [QueryDsl - QueryDsl란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/querydsl/querydsl.md)
 
+## React Native
+- [React Native - 아이콘 & 스플래시 이미지 사이즈](https://github.com/Gr8G1/gr8g1-memo/blob/main/react-native/splashscreen.md)
+
 ## Redis
 - [Redis - Redis란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/redis/redis.md)
 - [Redis - Redis EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/redis/redis-ec2-ubuntu.md)
+
+## SEO
+- [SEO - 리서치 노트](https://github.com/Gr8G1/gr8g1-memo/blob/main/seo/research.md)
 
 ## Spring
 - [Spring - Spring이란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/spring/spring.md)
@@ -94,3 +104,6 @@
 
 ## Vim
 - [Vim - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/vim/vim-commands.md)
+
+## Zsh
+- [Zsh - .zshrc 설정](https://github.com/Gr8G1/gr8g1-memo/blob/main/zsh/zshrc.md)
