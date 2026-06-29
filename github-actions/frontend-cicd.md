@@ -26,13 +26,13 @@ jobs:
         working-directory: front
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -44,7 +44,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}            // GITHUB PROJECT -> Settings -> Security -> Actions secrets and variables
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}        // GITHUB PROJECT -> Settings -> Security -> Actions secrets and variables

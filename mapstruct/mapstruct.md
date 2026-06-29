@@ -149,10 +149,9 @@ public interface MyMapper {
 - constant
   - 상수 매핑을 지정할 때 사용되는 값
 - expression
-  - SpEL 표현식을 이용하여 매핑할 때 사용되는 식
+  - **순수 Java 코드**를 이용해 매핑 값을 직접 지정하는 식이다(SpEL 아님). `java(...)` 안에 Java 표현식을 작성한다. 예: `expression = "java(email.split(\"@\")[0])"`
 - defaultExpression: 
-  - SpEL 표현식을 이용하여 매핑할 때 사용되는 식. 
-  - expression 속성과 유사하지만, 값이 없을 때 기본값으로 사용된다.
+  - expression과 같은 **Java 표현식**이지만, source 값이 null일 때만 기본값으로 사용된다.
 - defaultValue
   - 매핑할 필드의 값이 null일 때 사용되는 기본값
 - ignore
