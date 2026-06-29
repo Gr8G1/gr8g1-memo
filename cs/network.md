@@ -82,7 +82,7 @@ A, B, C라는 패킷에 1, 2, 3이라는 번호를 부여하여 패킷을 나누
 #### IP 구조
 IP 주소는 32bit(4byte) 길이로 구성된 논리적인 주소체계로서 OOO.OOO.OOO.OOO (IPv4 기준: 192.168.123.123)로 표기, '.' 으로 구분된 Octet(8bit / 1byte) 4개가 조합되어 IP주소를 나타나게 되는 것.
 실제 IP는 2진수로 표기되어 xxxxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx (x: 0 | 1)와 같은 형태로 구분되어 사람이 이해하고 외우기 어렵기에 때문에 10진수 표기법으로 사용되는것이다.
-**dot-decimal notice**로 불리기도 한다.
+**dot-decimal notation**으로 불리기도 한다.
 
 #### MAC(Media Access Control) : 물리적 주소 체계
 MAC 주소 또는 Physical Address라고도 한다.
@@ -107,8 +107,8 @@ Subnet mask는 Network ID 와 Host ID를 구분해주는 역할을 하여 Networ
   - IP Class 개념에 따라 다르게 설정된다.
   - A Class인 경우
     - 처음 octet(8bit)이 Network ID이며 나머지 octet(24bit)이 Host ID로 사용된다.  
-      가장 왼쪽 bit가 0으로 고정되어 시작하기 때문에 네트워크는 0 ~ 127까지 할당되고
-      네트워크 할당은 128곳에 사용가능하고, 호스트 수는 최대 16,777,214개 이다.
+      가장 왼쪽 bit가 0으로 고정되어 시작하기 때문에 네트워크 범위는 0 ~ 127이고
+      이 중 0(예약)과 127(루프백)을 제외한 1 ~ 126, 즉 실제 할당 가능한 네트워크는 126곳이며, 네트워크당 호스트 수는 최대 16,777,214개 이다.
 
 - IP Class 개념
 - IP Class의 경우 A,B,C,D,E Class로 나누어 Network ID와 Host ID를 구분하게 된다.

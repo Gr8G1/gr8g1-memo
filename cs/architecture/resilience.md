@@ -142,7 +142,7 @@ resilience4j:
       paymentService:
         max-attempts: 3                       # 최초 1회 + 재시도 2회
         wait-duration: 1s                     # 재시도 간 대기
-        enable-exponential-backoff: true      # 1s -> 2s -> 4s 지수 백오프
+        enable-exponential-backoff: true      # 재시도 2회면 대기는 1s -> 2s (지수 배수 2)
         exponential-backoff-multiplier: 2
 ```
 
