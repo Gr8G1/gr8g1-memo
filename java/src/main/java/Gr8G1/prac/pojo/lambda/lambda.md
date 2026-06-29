@@ -26,9 +26,9 @@
 - BiPredicate<T, U>
   - boolean test(T t, U u): T, U 매개변수를 받아 boolean(조건식 결과) 반환한다
 - UnaryOperator<T>: Function의 자손 (*단항*)
-  - T apply(T t): T를 배개변수로 받아 T로 매핑 후 반환한다.
+  - T apply(T t): T를 매개변수로 받아 T로 매핑 후 반환한다.
 - BinaryOperator<T>: BiFunction의 자손 (*이항*)
-  - T apply(T t, T t): T, T를 매개변수로 받아 T로 매핑 후 반환한다. 
+  - T apply(T t1, T t2): T, T를 매개변수로 받아 T로 매핑 후 반환한다. 
 
 ### 사용자 정의 람다 표현식
 @FunctionalInterface 1:1 매핑을 통해 구현

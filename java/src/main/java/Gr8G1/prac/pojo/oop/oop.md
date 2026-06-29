@@ -15,7 +15,7 @@
     - 불리언 타입: get<변수명> | is<변수명> | has<변수명> (의미에 따라 다양하게 작성)
   - setter 정의
     - set<변수명> (타입 매개변수) : *단일(1개)*의 매개변수만을 취한다.
-    - 새로운 데이터를 저장할때 Varidation을 진행한다.
+    - 새로운 데이터를 저장할때 Validation을 진행한다.
     > 공개된 메서드로 작성시 get/set 명명규칙을 사용하여 작성하는것이 관례이다.
 
 2. **상속**
@@ -64,7 +64,7 @@
       }
   
       public class B {
-        private String C;
+        private String c;
         private A a;  // 클래스 타입의 멤버변수
   
         public B(String c, String a) {
@@ -95,11 +95,11 @@
   - 추상 클래스는 실체(인스턴스)화 불가능하다.
   ```java
     abstract class A {
-       abstract viod explicit(); // -> 추상 메소드(미완성 메소드) 의도적 미완성
+       abstract void explicit(); // -> 추상 메소드(미완성 메소드) 의도적 미완성
     }
     
     class B extends A {
-      viod explicit() {  } // -> 미완성 메소드 구체화
+      void explicit() {  } // -> 미완성 메소드 구체화
     }
   ```
   
@@ -147,7 +147,7 @@
    
 - 장점
   1. 여러 객체를 하나의 타입으로 관리가 가능하기때문에 코드 관리가 편리해지고 유지보수가 용이하다.
-  2. 코드 재사용성이 높진다.
+  2. 코드 재사용성이 높아진다.
   3. 클래스간 의존성이 줄어들어 확장성이 높고 결합도가 낮아져 안전성이 높아진다.
 
 - 참조 변수의 타입 변환

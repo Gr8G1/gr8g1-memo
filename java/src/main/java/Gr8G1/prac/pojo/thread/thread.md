@@ -25,7 +25,7 @@
       - isInterrupted: interrupted 상태값 반환
   - suspend, resume, stop: 교착상태(Dead-lock)를 일으키는 요소로 현재 deprecated 된 메소드들이다.
     - suspend: Thread를 멈추게 한다.
-    - resume: Thread를 싱행대기 상태로 변경한다.
+    - resume: Thread를 실행대기 상태로 변경한다.
     - stop: 호출 즉시 Thread를 종료한다.
   - yield: 다른 Thread에게 자신의 자원(메모리) 실행(사용)시간을 양도한다.
   - join: Thread 자신의 작업을 잠시 멈추고 다른 Thread의 작업 수행을 지정 시간만큼 기다린다.
