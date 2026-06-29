@@ -113,8 +113,9 @@ source $(brew --prefix nvm)/nvm.sh
 
 export LC_ALL=en_US.UTF-8
 
+# zsh-syntax-highlighting 은 아래처럼 직접 source 하므로 plugins 배열에 다시 넣지 않는다.
+# (oh-my-zsh.sh source 이후에 plugins=(...) 를 재할당하면 위의 plugins=(git)가 덮어써지고 적용도 안 됨)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-plugins=( zsh-syntax-highlighting)
 
 # nvm 
 # nvm ls
@@ -123,7 +124,7 @@ plugins=( zsh-syntax-highlighting)
 alias nvms='nvm alias default '
 
 # openssl
-alias genssl='echo -n 'gen-sha256' | openssl dgst -sha256 -r | awk '{ print $1 }' | tee openssl-shs256.txt'
+alias genssl="echo -n gen-sha256 | openssl dgst -sha256 -r | awk '{ print \$1 }' | tee openssl-sha256.txt"
 alias addssh='ssh-add ~/.ssh/id_rsa'
 
 # git repo commands

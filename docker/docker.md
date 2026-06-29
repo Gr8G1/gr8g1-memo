@@ -169,9 +169,8 @@ $ docker start [옵션] <컨테이너 이름 또는 ID> [컨테이너...]
 #   -a, --attach: 컨테이너에서 출력되는 로그를 터미널에 출력
 #   -i, --interactive: 컨테이너와 터미널 간의 입력 상호 작용을 가능하게 한다.
 #   -d, --detach: 컨테이너를 백그라운드에서 실행
-#   -p, --publish: 호스트와 컨테이너 간의 포트 매핑을 설정
-#   -e, --env: 컨테이너 내부의 환경 변수를 설정
 # <컨테이너 이름 또는 ID>: 시작할 컨테이너의 이름이나 ID
+# (참고: -p/--publish, -e/--env 는 docker run/create 시점에만 지정 가능하며 docker start 에는 없다)
 
 # * 실행 중인 컨테이너를 중지
 $ docker stop [옵션] <컨테이너 이름 또는 ID> [컨테이너...]
@@ -220,8 +219,8 @@ $ docker rmi [옵션] <이미지명> [이미지명...]
 # [옵션]: 옵션을 설정 : 대표적으로 -f, -a 등이 있다.
 #   -f, --force: 이미지를 강제로 삭제 
 #       이미지를 사용하는 모든 컨테이너를 자동으로 중지하고 삭제한다.
-#   --no-prune: 태그 없는 이미지만 삭제 
-#       이 옵션을 사용하면 이미지를 삭제하기 전에 해당 이미지가 사용 중인지 확인하지 않는다.
+#   --no-prune: 태그 없는 부모(중간) 이미지를 삭제하지 않음
+#       (기본적으로 rmi 는 참조가 끊긴 부모 레이어도 함께 정리하는데, 이 옵션은 그 정리를 막는다)
 #   -a, --all: 모든 이미지를 삭제 
 #       docker rmi 명령어를 실행할 때 IMAGE 인수를 지정하지 않으면 기본적으로 모든 이미지를 삭제한다.
 #   --filter: 지정된 조건에 따라 삭제할 이미지를 필터링한다.
@@ -291,8 +290,8 @@ docker run --name my-node -d -p 8080:8080 -v $(pwd):/app/src node:10
 다중 컨테이너 애플리케이션을 정의하고 공유하는 목적으로 사용된다.
 
 - 프로젝트 루트에 docker-compose.yml 파일 생성
-  - Compose 파일에서 먼저 스키마 버전을 정의시 최신 버전을 사용하는것이 가장 안정적이다.
-    > version: https://docs.docker.com/compose/compose-file/compose-versioning/
+  - Compose V2부터는 최상단 `version:` 키가 obsolete(불필요)이므로 생략한다. (지정하면 경고 발생)
+    > Compose 파일 참조: https://docs.docker.com/compose/compose-file/
 
 #### Sample docker.compose.yml
 ```

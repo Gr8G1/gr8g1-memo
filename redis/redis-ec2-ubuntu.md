@@ -34,7 +34,7 @@ $ sudo vi /etc/redis/redis.conf
 # /requirepass 검색 후 비밀번호 설정
 
 # 접속 가능 ip 주소 변경
-# /bind 검색 ip 수정  Ex: 0:0:0:0
+# /bind 검색 ip 수정  Ex: 0.0.0.0 (모든 인터페이스 허용 — 외부 노출 시 requirepass·방화벽 필수, 보안 주의)
 
 # max 메모리
 # /maxmemory 검색 후 메모리 변경

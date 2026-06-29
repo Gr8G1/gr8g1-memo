@@ -20,10 +20,10 @@ Android Splash Image Size
     * Portrait: 480x800 px
     * Landscape: 800x480 px
 * XHDPI:
-    * Portrait: 720px1280 px
+    * Portrait: 720x1280 px
     * Landscape: 1280x720 px
 * XXHDPI:
-    * Portrait: 960px1600 px
+    * Portrait: 960x1600 px
     * Landscape: 1600x960 px
 * XXXHDPI:
     * Portrait: 1280x1920 px
