@@ -39,6 +39,9 @@
 - [Docker - Docker EC2(Ubuntu)](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker-ec2-ubuntu.md)
 - [Docker - Docker & Nginx & Certbot](https://github.com/Gr8G1/gr8g1-memo/blob/main/docker/docker-nginx-certbot.md)
 
+## Elasticsearch
+- [Elasticsearch - Elasticsearch란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/elasticsearch/elasticsearch.md)
+
 ## Git
 - [Git - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/git/git-commands.md)
 - [Git - GitHub SSH 키 교체(macOS)](https://github.com/Gr8G1/gr8g1-memo/blob/main/git/git-ssh.md)
@@ -60,6 +63,9 @@
 - [Java - 람다](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/lambda/lambda.md)
 - [Java - 쓰레드](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/thread/thread.md)
 - [Java - 파일 I/O](https://github.com/Gr8G1/gr8g1-memo/blob/main/java/src/main/java/Gr8G1/prac/pojo/fileIO/PrFileIO.md)
+
+## Kafka
+- [Kafka - Kafka란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/kafka/kafka.md)
 
 ## Linux
 - [Linux - 명령어](https://github.com/Gr8G1/gr8g1-memo/blob/main/linux/linux-commands.md)
