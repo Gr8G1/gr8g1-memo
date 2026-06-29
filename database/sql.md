@@ -82,7 +82,7 @@ CREATE TABLE member
   age       INT,
 
   -- 입력값 자체를 검증하는 제약, 위반 시 INSERT/UPDATE 거부
-  CONSTRAINT chk_member_age CHECK (age >= 0 AND grade = 'BRONZE'),
+  CONSTRAINT chk_member_age CHECK (age >= 0),
   PRIMARY KEY (id)
 );
 

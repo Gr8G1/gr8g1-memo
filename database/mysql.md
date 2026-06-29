@@ -81,10 +81,10 @@ spring:
     # DBeaver: &allowPublicKeyRetrieval=true
     username:
     password:
-    driver-class-name: "com.mysql.jdbc.Driver"
+    driver-class-name: "com.mysql.cj.jdbc.Driver"   # connector-j 8.x 정식 드라이버(구 com.mysql.jdbc.Driver는 deprecated)
  jpa:
    database: mysql
-   database-platform: org.hibernate.dialect.MySQL8Dialect           # ! DB 버전별 상이 mysql -V 확인
+   database-platform: org.hibernate.dialect.MySQLDialect            # Hibernate 6+(Boot 3.x): 버전 자동 감지, 보통 생략 가능(구 MySQL8Dialect는 deprecated)
    hibernate:
      ddl-auto: update
    show-sql: true
