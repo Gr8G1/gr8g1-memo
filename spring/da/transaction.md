@@ -42,3 +42,24 @@
     - 트랜잭션 내에서 한 번 조회한 데이터를 반복해서 조회해도 같은 데이터가 조회되도록 한다.
   - Isolation.SERIALIZABLE
     - 동일한 데이터에 대해서 동시에 두 개 이상의 트랜잭션이 수행되지 못하도록 막는다.
+
+#### 격리 수준이 막는 동시성 현상
+격리 수준은 아래 세 가지 이상 현상을 어디까지 막는지로 구분된다.
+
+| 격리 수준 | Dirty Read | Non-repeatable Read | Phantom Read |
+| --- | --- | --- | --- |
+| READ_UNCOMMITTED | 발생 | 발생 | 발생 |
+| READ_COMMITTED | 방지 | 발생 | 발생 |
+| REPEATABLE_READ | 방지 | 방지 | 발생(*) |
+| SERIALIZABLE | 방지 | 방지 | 방지 |
+
+- **Dirty Read(미커밋 읽기)**: 다른 트랜잭션이 아직 커밋하지 않은 변경을 읽는 것.
+- **Non-repeatable Read(반복 불가 읽기)**: 같은 행을 두 번 읽었는데 그 사이 다른 트랜잭션의 수정·커밋으로 값이 달라지는 것.
+- **Phantom Read(유령 읽기)**: 같은 조건으로 여러 행을 두 번 조회했는데 그 사이 삽입·삭제로 결과 행 집합이 달라지는 것.
+- (*) 표준상 REPEATABLE_READ는 Phantom을 허용하지만, MySQL InnoDB는 갭 락(Gap Lock)으로 사실상 Phantom도 막는다.
+
+#### @Transactional 롤백 규칙 (자주 틀리는 핵심)
+- 기본적으로 **`RuntimeException`(언체크 예외)과 `Error`가 발생할 때만 롤백**된다.
+- **체크 예외(checked exception, 예: `IOException`)는 기본적으로 롤백되지 않고 커밋된다.** 체크 예외에도 롤백하려면 `@Transactional(rollbackFor = Exception.class)`로 명시해야 한다.
+- 특정 예외만 롤백에서 제외하려면 `noRollbackFor`를 사용한다.
+- 같은 클래스 내부에서 메소드를 직접 호출(self-invocation)하면 프록시를 거치지 않아 `@Transactional`이 적용되지 않는다.

@@ -93,9 +93,9 @@ remote_read:
    - 주어진 시간 범위 내에서 카운터 메트릭의 증가량을 반환한다
      - Ex: increase(http_requests_total[1h])는 지난 1시간 동안 http_requests_total 카운터 메트릭의 증가량을 계산한다.
 2. rate()
-   - 게이지 메트릭의 변화율을 계산하는 데 사용 
-   - 주어진 시간 범위 내에서 게이지 메트릭의 변화율을 반환 
-     - Ex: rate(cpu_usage_percent[5m])는 최근 5분 동안 cpu_usage_percent 게이지 메트릭의 평균 변화율을 계산한다.
+   - **카운터(Counter)** 메트릭의 초당 평균 증가율(per-second rate)을 계산하는 데 사용
+   - 주어진 시간 범위 내에서 카운터의 초당 증가율을 반환한다. (게이지에는 사용하지 않으며, 게이지의 순간 변화율은 `deriv()`를 쓴다)
+     - Ex: rate(http_requests_total[5m])는 최근 5분 동안 http_requests_total 카운터의 초당 평균 요청 수를 계산한다.
 3. sum()
    - 여러 개의 메트릭 값을 합산하는 데 사용
    - Ex: sum(http_requests_total)은 http_requests_total 메트릭의 모든 인스턴스의 값을 합산한다.
