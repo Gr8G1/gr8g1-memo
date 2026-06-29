@@ -9,7 +9,7 @@ Spring MVC 기반 애플리케이션의 인증(Authentication)과 인가(Authori
 - 애플리케이션 사용자의 역할(Role)에 따른 권한 레벨 적용
 - 애플리케이션에서 제공하는 리소스에 대한 접근 제어
 - 민감한 정보에 대한 데이터 암호화
-- TSL/SSL 적용
+- TLS/SSL 적용
 - 일반적으로 알려진 웹 보안 공격 차단
 - 이 외에도 SSO, 클라이언트 인증서 기반 인증, 메서드 보안, 접근 제어 목록(Access Control List) 같은 보안을 위한 대부분의 기능을 지원
 
@@ -31,12 +31,14 @@ Spring MVC 기반 애플리케이션의 인증(Authentication)과 인가(Authori
 
 #### 주의 사항
 SimpleGrantedAuthority 권한 지정
-  - Role 베이스 형태의 권한을 지정할 때 ‘Role_’ + 권한명 형태로 지정해 주어야 한다.
+  - Role 베이스 형태의 권한을 지정할 때 ‘ROLE_’ + 권한명 형태(대문자)로 지정해 주어야 한다.
     - 참조: org/springframework/security/core/userdetails/User.java -> roles()
   - Spring Security 에서 User로 생성된 정보는 UserDetails로 관리한다.
 
 ### Ant Pattern VS mvcMatcher
 > Ant Document: [https://ant.apache.org/manual/dirtasks.html#patterns](https://ant.apache.org/manual/dirtasks.html#patterns)
+>
+> **버전 주의(Spring Security 5.8 / 6.0+):** `antMatchers()`·`mvcMatchers()`·`regexMatchers()`는 모두 **deprecated**되어 `requestMatchers()`로 통합되었다. 아래 설명은 개념 이해용이며, 현재 코드에서는 `requestMatchers("/secured")` 형태를 사용한다. 인가 설정 진입점도 `authorizeRequests()` → `authorizeHttpRequests()`로 바뀌었다.
 
 - antMatcher(String antPattern)
   - antPattern 과 일치 할시 HttpSecurity 가 호출(실행) 될 수 있도록 정의한다.
@@ -73,6 +75,6 @@ SimpleGrantedAuthority 권한 지정
   - 토큰내에 인증된 사용자 정보 등을 포함하고 있으므로 세션에 비해 상대적으로 많은 네트워크 트래픽을 사용한다.
   - 기본적으로 서버 측에서 토큰을 관리하지 않으므로 보안성 측면에서 조금 더 불리하다.
   - 인증된 사용자 request의 상태를 유지할 필요가 없기 때문에 서버의 확장성 면에서 유리하고, 세션 불일치 같은 문제가 발생하지 않는다.
-  - 토큰에 포함되는 사용자 정보는 토큰의 특성상 암호화가 되지 않기때문에 공격자에게 토큰이 탈취될 경우, 사용자 정보를 그대로 제공하는 셈이된다. 따라서 민감한 정보는 토큰에 포함시키면 안된다.
+  - 토큰에 포함되는 사용자 정보는 기본적으로 **서명(무결성 검증)만 될 뿐 암호화되지 않으므로**(JWT의 JWS 방식 + Base64 인코딩일 뿐), 공격자에게 토큰이 탈취될 경우 사용자 정보를 그대로 제공하는 셈이 된다. 따라서 민감한 정보는 토큰에 포함시키면 안 된다. (별도로 JWE로 암호화는 가능하나 일반적이지 않다.)
   - 기본적으로 토큰이 만료되기 전까지는 토큰을 무효화 시킬 수 없다.
   - CSR(Client Side Rendering) 방식의 애플리케이션에 적합한 방식이다.
