@@ -1,6 +1,6 @@
 ## Documents
 - SpringBoot: [https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.testing](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.testing)
-- MovkMvc: [https://docs.spring.io/spring-framework/docs/6.0.3/reference/html/testing.html#spring-mvc-test-framework](https://docs.spring.io/spring-framework/docs/6.0.3/reference/html/testing.html#spring-mvc-test-framework)
+- MockMvc: [https://docs.spring.io/spring-framework/docs/6.0.3/reference/html/testing.html#spring-mvc-test-framework](https://docs.spring.io/spring-framework/docs/6.0.3/reference/html/testing.html#spring-mvc-test-framework)
 - AssertJ: [https://assertj.github.io/doc/](https://assertj.github.io/doc/)
 - Hamcrest: [https://github.com/hamcrest/JavaHamcrest](https://github.com/hamcrest/JavaHamcrest)
 - Mockito: [https://site.mockito.org/](https://site.mockito.org/)
@@ -12,7 +12,7 @@
 @SpringBootTest
   - 전체 컨텍스트 실행 후 테스트 진행 (통합 테스트 시 사용)
 
-### MvcMock
+### MockMvc
   - Spring MVC 테스트 클래스 (내부 설명 구문 확인 가능)
     - perform(), get() ... (내부 설명 구문 확인 가능)
     - andExpect, andDo ... (내부 설명 구문 확인 가능)
@@ -23,6 +23,7 @@
 
 @MockBean(JpaMetamodelMappingContext.class)
 개별 컨트롤러 슬라이스 테스트시 JPA 모듈 컨텍스트 삽입 (필요시)
+  - 주의: `@MockBean`은 Spring Boot 3.4+에서 deprecated → `@MockitoBean`(org.springframework.test.context.bean.override.mockito)으로 대체됨.
 
 @AutoConfigureMockMvc
 MVC 테스트 설정 삽입 (내부 확인)
