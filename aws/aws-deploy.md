@@ -22,13 +22,13 @@
 $ bash
 $ cd ~
 $ sudo apt update
-$ sudo apt install openjdk-11-jre-headless
+$ sudo apt install openjdk-17-jre-headless   # 애플리케이션 Java 버전에 맞춘다(Spring Boot 3.x는 17+ 필수)
 ```
 
 #### Github Project SSH 연결 설정
 ```bash
 $ ssh-keygen || ssh-keygen -t ed25519 -C "your_email@example.com"
-$ cat .ssh/id_rsa.pub             # git -> settings -> SSH and GPG keys -> SSH keys 등록
+$ cat .ssh/id_ed25519.pub         # 위에서 ed25519로 생성한 공개키 (RSA로 만들었다면 id_rsa.pub). git -> settings -> SSH and GPG keys 등록
 ```
 - **ssh-key issue**: [2023-03-23-we-updated-our-rsa-ssh-host-key](https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/)
 
@@ -80,7 +80,10 @@ $ mysql -u [계정 ID] --host [엔드 포인트 주소] -P [포트 번호] -p
 ```
 
 ### AWS - CloudFront, Route53, ACM
-- 
+정적 콘텐츠 배포·도메인·인증서를 담당하는 3종 세트다.
+- **CloudFront**: AWS의 CDN. S3·ALB 등 오리진의 콘텐츠를 전 세계 엣지에 캐싱해 지연을 줄이고 HTTPS를 종단한다.
+- **Route 53**: AWS의 DNS 서비스. 도메인 등록·레코드 관리·헬스 체크 기반 라우팅을 제공한다.
+- **ACM(AWS Certificate Manager)**: TLS 인증서를 무료로 발급·자동 갱신한다. CloudFront·ALB에 연결해 HTTPS를 적용한다.
 
 ### AWS - CodeDeploy (Github Actions 사용시)
 #### 환경변수 등록
@@ -162,9 +165,10 @@ $ sudo vi /etc/environment
 
 #### /build.gradle
 ```groovy
-  // # Boot v2.3 이하
+  // # 아래는 구 Spring Cloud AWS (Boot 2.3 이하) 기준 — 레거시
+  // 현재는 io.awspring.cloud 로 이관됨: implementation 'io.awspring.cloud:spring-cloud-aws-starter-parameter-store'
+  // 신규 프로젝트는 awspring 문서 참고: https://docs.awspring.io/spring-cloud-aws/docs/current/reference/html/index.html
   // Spring cloud 부트 호환 버전: https://spring.io/projects/spring-cloud#overview
-  // aws parameter 버전 : https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws-parameter-store-config
 
   ext {
     set('springCloudVersion', "부트 호환 버전")

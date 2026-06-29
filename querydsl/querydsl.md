@@ -13,43 +13,22 @@ JPAQueryFactory 를 생성할 때 제공하는 EntityManager 에 달려있는데
 
 ### QueryDsl 적용
 #### build.gradle
+> 과거에는 `com.ewerk.gradle.plugins.querydsl` 플러그인을 썼으나, Gradle 5+/Spring Boot 2.6+에서 호환 문제로 더 이상 권장되지 않는다. 현재는 **`annotationProcessor`** 로 Q타입을 생성하는 방식이 표준이다.
+
 ```groovy
-plugins {
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
-}
-
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-
-ext {
-    set('queryDslVersion', "5.0.0")
-}
-
 dependencies {
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
-}
+    // Spring Boot 3.x (Jakarta) — classifier 'jakarta' 사용
+    implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
-def querydslDir = "$buildDir/generated/querydsl"
-
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir querydslDir
-        }
-    }
-}
-
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
+    // Spring Boot 2.x (javax)라면 classifier 없이:
+    // implementation "com.querydsl:querydsl-jpa:5.0.0"
+    // annotationProcessor "com.querydsl:querydsl-apt:5.0.0"
 }
 ```
+- Q타입(QEntity)은 `build/generated/sources/annotationProcessor/...` 경로에 자동 생성되며, 별도 sourceSet 설정 없이 Gradle이 컴파일에 포함한다. (IDE에서 안 보이면 `./gradlew compileJava` 후 새로고침)
 
 ### 사용자 정의 리포지토리
 1. 사용자 정의 인터페이스 작성
@@ -64,12 +43,12 @@ public interface TestRepositoryCustom {
 public class TestRepositoryImpl implements TestRepositoryCustom {
      private final JPAQueryFactory queryFactory;
 
-     public MemberRepositoryImpl(EntityManager em) {
+     public TestRepositoryImpl(EntityManager em) {
          this.queryFactory = new JPAQueryFactory(em);
      }
 
      @Override
-     public List<Entity>search() {
+     public List<Entity> search(Condition condition) {
          ...
      }
 }
