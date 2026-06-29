@@ -23,10 +23,11 @@
 
 1. @Configuration 어노테이션이 선언된 클래스를 로드
 2. @EnableAutoConfiguration 자동 구성을 활성화
-  - @EnableAutoConfiguration 실행될때 Spring Boot는 META-INF/spring.factories 파일에서 AutoConfigurationImportSelector를 찾아서 AutoConfigurationImportSelector의 selectImports() 메서드를 호출한다.
-  - AutoConfigurationImportSelector를 사용하여 classpath 상의 설정 정보를 찾아서 @Configuration 어노테이션이 붙은 클래스를 로드하고, @Bean 어노테이션을 사용하여 Spring Bean을 등록한다.
-  - 또한, @Conditional 어노테이션을 사용하여 필요한 구성 요소만 활성화한다.
-  - 'org.springframework.boot.autoconfigure.AutoConfiguration.imports'는 Spring Boot에서 자동 구성(auto-configuration)을 수행할 때, @EnableAutoConfiguration 어노테이션으로 설정된 클래스에서 참조되는 클래스들을 지정하는 META-INF/spring.factories 파일의 프로퍼티이다.
+  - @EnableAutoConfiguration 실행 시 Spring Boot는 `AutoConfigurationImportSelector`를 통해 자동 구성 후보 클래스 목록을 읽어들인다.
+  - 그 목록을 정의하는 위치는 **버전에 따라 다르다.**
+    - Spring Boot 2.6 이하: `META-INF/spring.factories`의 `EnableAutoConfiguration` 키에 나열.
+    - Spring Boot 2.7+ / 3.x: 별도 파일 **`META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`** 에 한 줄에 하나씩 나열(2.7부터 권장, 3.0부터 `spring.factories` 자동구성 방식은 제거됨).
+  - 찾은 `@Configuration` 클래스를 로드해 `@Bean`으로 Spring Bean을 등록하며, `@Conditional` 계열 어노테이션으로 조건에 맞는 구성 요소만 활성화한다.
 3. @ComponentScan 스프링 Bean 스캐닝
 
 

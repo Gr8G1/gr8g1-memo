@@ -29,3 +29,31 @@ Connection 객체를 새로 생성하는 것이 아니라 미리 만들어 둔 C
 Connection을 미리 만들어서 보관하고 애플리케이션이 필요할 때 이 Connection을 제공해주는 역할을 하는 Connection 관리자를 Connection Pool이라고 한다.
 > Spring Boot 2.0 이전 버전에는 Apache 재단의 오픈 소스인 Apache Commons DBCP(Database Connection Pool, DBCP)를 주로 사용했지만
 > Spring Boot 2.0 부터는 성능면에서 더 나은 이점을 가지고 있는 HikariCP를 기본 DBCP로 채택했다.
+
+### Spring JDBC: JdbcTemplate
+순수 JDBC는 위 흐름(Connection·Statement·ResultSet 열고 닫기, 예외 처리)을 매번 반복해야 한다. Spring은 이 반복(상용구, boilerplate)을 제거한 **`JdbcTemplate`** 을 제공한다. 개발자는 SQL과 결과 매핑만 작성하고, 커넥션 획득·자원 반납·예외 변환은 Spring이 처리한다.
+
+```java
+@Repository
+@RequiredArgsConstructor
+public class MemberJdbcRepository {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public Member findById(Long id) {
+        // SQL과 RowMapper(행→객체 매핑)만 작성하면 자원 관리는 Spring이 담당
+        return jdbcTemplate.queryForObject(
+            "SELECT id, name FROM member WHERE id = ?",
+            (rs, rowNum) -> new Member(rs.getLong("id"), rs.getString("name")),
+            id
+        );
+    }
+
+    public int save(Member member) {
+        return jdbcTemplate.update("INSERT INTO member(name) VALUES (?)", member.getName());
+    }
+}
+```
+
+- **`NamedParameterJdbcTemplate`**: `?` 위치 기반 대신 `:name` 같은 **이름 기반 파라미터**를 쓸 수 있어 가독성이 좋다.
+- JDBC의 `SQLException`(체크 예외)을 Spring의 `DataAccessException`(언체크) 계층으로 변환해, 벤더 종속적인 예외 처리에서 벗어나게 해준다.
