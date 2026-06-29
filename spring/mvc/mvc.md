@@ -171,14 +171,16 @@ void getData() {
               String.class
       );
 
+      // response 는 try 블록 스코프이므로 사용도 try 안에서 한다.
+      System.out.println("Response code: " + response.getStatusCode().value()); // getStatusCodeValue()는 deprecated
+      System.out.println(response.getBody());
     } catch (RestClientException e) {
       // handle exception
     }
-
-    System.out.println("Response code: " + response.getStatusCodeValue());
-    System.out.println(response.getBody());
 }
 ```
+
+> 참고(Spring 6.1+): 동기 HTTP 호출은 `RestTemplate` 대신 fluent API인 **`RestClient`** 사용이 권장된다(`RestTemplate`은 유지보수 모드). 비동기/리액티브 호출은 `WebClient`를 사용한다.
 
 ### Apache httpclient VS Apache HttpComponents
 Apache HttpClient는 현재 공식적으로 개발이 중단된 상태이고, Apache HttpComponents 프로젝트로 대체되었다.

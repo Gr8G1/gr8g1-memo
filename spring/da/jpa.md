@@ -40,7 +40,7 @@ JPA에서는 테이블과 매핑되는 엔티티(Entity) 객체 정보를 영속
 - 트랜잭션 커밋 - 플러시 자동 호출
 - JPQL 쿼리 실행 - 플러시 자동 호출
 
- > 영속성 컨텍스트는 플러시 호출에 영향을 받지 않는다. (1차 캐시가 지워지지 않는다)
+ > 플러시(flush)는 영속성 컨텍스트의 변경 내용을 DB에 반영(SQL 전송)할 뿐, **1차 캐시(영속성 컨텍스트)를 비우지 않는다.** (캐시를 비우는 것은 clear/detach이며 flush와 구분된다.)
 
 ### 엔티티의 생명주기
 - 비영속 (new/transient)
@@ -88,7 +88,7 @@ private List<T> ts = new ArrayList<>();
   - @JoinColumn(insertable=false, updatable=false) 읽기 전용 필드로 지정해서 양방향 형태를 취한다.
 
 - _테이블 기준_
-  - 다 테이블에서 외래키(Forign key)를 갖는다.
+  - 다 테이블에서 외래키(Foreign key)를 갖는다.
   - 객체 기준
   - 일 기준 객체에서 참조 객체를 갖는다. (참조 객체는 외래키 역할을 수행)
 
@@ -98,7 +98,7 @@ private List<T> ts = new ArrayList<>();
   - 연관 관계의 주인
 
 - 테이블 기준
-  - 다 테이블에서 외래키(Forign key)를 갖는다.
+  - 다 테이블에서 외래키(Foreign key)를 갖는다.
 
 - 객체 기준
   - 다 기준 객체에서 참조 객체를 갖는다. (참조 객체는 외래키 역할을 수행)
@@ -111,9 +111,9 @@ private List<T> ts = new ArrayList<>();
   - @JoinTable로 연결 테이블 지정
     ```java
     @JoinTable(
-      name = "JOIN_TABLE_NAME"
-      joinColumns = @JoinColumn(name = "Join_PK")
-      inversejoinColumns = @JoinColumn(name = "Inverse_Join_PK")
+      name = "JOIN_TABLE_NAME",
+      joinColumns = @JoinColumn(name = "Join_PK"),
+      inverseJoinColumns = @JoinColumn(name = "Inverse_Join_PK")
     )
     ```
 

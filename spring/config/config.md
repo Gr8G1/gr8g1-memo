@@ -59,11 +59,11 @@ Ex:
 application:
   servers:
     - ip: '127.0.0.1'
-  path: '/'
+      path: '/'
     - ip: '127.0.0.2'
-    path: '/'
+      path: '/'
     - ip: '127.0.0.3'
-    path: '/'
+      path: '/'
 
 #### Multiple Profiles
   logging:

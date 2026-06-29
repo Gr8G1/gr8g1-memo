@@ -127,6 +127,7 @@ Ex: 트래픽이 폭발하면서 결제 부분에만 부하가 몰리고, 주문
 이 폴더(architecture)의 나머지 문서들을 주제별로 정리한 인덱스다.
 
 - [마이크로서비스 아키텍처(MSA)](./msa.md) — 시스템을 작고 독립적인 서비스로 쪼개는 핵심 패턴과 분리 기준.
+- [저장소 전략(Repository Strategy)](./repository-strategy.md) — 모놀리식/MSA 소스를 모노레포·멀티레포·서브모듈 중 무엇으로 관리할지 결정하는 기준.
 - [BFF(Backend For Frontend)](./bff.md) — 클라이언트(웹/모바일)별로 전용 백엔드를 두어 응답을 최적화하는 패턴.
 - [API 게이트웨이(API Gateway)](./api-gateway.md) — 여러 서비스 앞단에서 라우팅·인증·집계를 담당하는 단일 진입점.
 - [서비스 디스커버리(Service Discovery)](./service-discovery.md) — 동적으로 늘고 줄어드는 서비스의 위치를 찾아 연결하는 메커니즘.

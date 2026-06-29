@@ -1,4 +1,4 @@
-## 인증(Authorization) & 권한(Authorization)
+## 인증(Authentication) & 권한(Authorization)
 
 ### HTTPS
   - HTTP Secure Socket layer의 약자로 HTTP over SSL(TLS), HTTP over Secure라고 부르기도 한다.
