@@ -16,6 +16,18 @@
 - [CS - 온프레미스(On-premise) vs 클라우드(Cloud) 시스템](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/on-premise-vs-cloud.md)
 - [CS - 배포전략](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/deployment-strategy.md)
 
+### Architecture
+- [Architecture - 소프트웨어 아키텍처(개요)](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/architecture.md)
+- [Architecture - MSA(마이크로서비스)](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/msa.md)
+- [Architecture - 저장소 전략(모노레포/멀티레포/서브모듈)](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/repository-strategy.md)
+- [Architecture - BFF(Backend for Frontend)](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/bff.md)
+- [Architecture - API Gateway](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/api-gateway.md)
+- [Architecture - 서비스 디스커버리](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/service-discovery.md)
+- [Architecture - 분산 시스템 안정성](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/resilience.md)
+- [Architecture - 분산 데이터 일관성](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/data-consistency.md)
+- [Architecture - 이벤트 기반 아키텍처](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/event-driven.md)
+- [Architecture - 클라우드 네이티브 & XaaS](https://github.com/Gr8G1/gr8g1-memo/blob/main/cs/architecture/cloud-native.md)
+
 ## Database
 - [Database - Database란?](https://github.com/Gr8G1/gr8g1-memo/blob/main/database/database.md)
 - [Database - Sql](https://github.com/Gr8G1/gr8g1-memo/blob/main/database/sql.md)
